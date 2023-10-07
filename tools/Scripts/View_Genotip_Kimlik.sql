@@ -1,0 +1,10 @@
+SELECT
+    ID,
+    DOSYANO,
+    AD,
+    SOYAD,
+    VATANDASLIKNO,
+    CINSIYET,
+    DOGUMTARIH
+FROM
+    GEN2000.dbo.KIMLIK
