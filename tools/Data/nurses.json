@@ -1,0 +1,412 @@
+[
+    {
+        "model": "formedical.nurse",
+        "pk": 17,
+        "fields": {
+            "kullaniciadi": "BENGÜ BOZDEMİR",
+            "sifre": "BENGÜ",
+            "kullanici": "BB",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 28,
+        "fields": {
+            "kullaniciadi": "DEPO",
+            "sifre": "SDGDGDG",
+            "kullanici": "DP",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 29,
+        "fields": {
+            "kullaniciadi": "DERYA AYVACI",
+            "sifre": "DERYA38",
+            "kullanici": "DH",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 31,
+        "fields": {
+            "kullaniciadi": "DİLEK YILMAZ",
+            "sifre": "1234",
+            "kullanici": "DY",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 56,
+        "fields": {
+            "kullaniciadi": "HALİL YILMAZ",
+            "sifre": "38Emrin.",
+            "kullanici": "HY",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 154,
+        "fields": {
+            "kullaniciadi": "OKTAY YILMAZ",
+            "sifre": "OKTAY",
+            "kullanici": "OY",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 165,
+        "fields": {
+            "kullaniciadi": "SAMAHAT GÜRBÜZ AYTEKİN",
+            "sifre": "1234",
+            "kullanici": "SA",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 173,
+        "fields": {
+            "kullaniciadi": "SEVİM GÜRBÜZ",
+            "sifre": "SEVİM21",
+            "kullanici": "S8",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 184,
+        "fields": {
+            "kullaniciadi": "TUĞBA KAYA",
+            "sifre": "1234",
+            "kullanici": "T6",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 192,
+        "fields": {
+            "kullaniciadi": "YELİZ ÜZÜM DURMAZ",
+            "sifre": "YELİZ21",
+            "kullanici": "YÜ",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 193,
+        "fields": {
+            "kullaniciadi": "ZEHRA YAZGI",
+            "sifre": "1234",
+            "kullanici": "YZ",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 218,
+        "fields": {
+            "kullaniciadi": "HİLAL TÜYSÜZ",
+            "sifre": "1234",
+            "kullanici": "HT",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 235,
+        "fields": {
+            "kullaniciadi": "ZEYNEP KARAHAN",
+            "sifre": "ASYA",
+            "kullanici": "ZK",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 236,
+        "fields": {
+            "kullaniciadi": "DENİZ PALTA",
+            "sifre": "YAKUP",
+            "kullanici": "D6",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 238,
+        "fields": {
+            "kullaniciadi": "SEDEF AKI",
+            "sifre": "SEDEF",
+            "kullanici": "SD",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 253,
+        "fields": {
+            "kullaniciadi": "NURAN ALAGAS",
+            "sifre": "0606",
+            "kullanici": "NA",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 273,
+        "fields": {
+            "kullaniciadi": "SİBEL ALTINÖZ",
+            "sifre": "SİBEL",
+            "kullanici": "SZ",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 315,
+        "fields": {
+            "kullaniciadi": "ÖZNUR ÇETİNTAŞ",
+            "sifre": "ÖZNUR",
+            "kullanici": "ÖT",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 316,
+        "fields": {
+            "kullaniciadi": "TUĞBA KAYAA",
+            "sifre": "TUĞBA",
+            "kullanici": "TK",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 324,
+        "fields": {
+            "kullaniciadi": "M 6.KAT SERVİS",
+            "sifre": "123456",
+            "kullanici": "6S",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 343,
+        "fields": {
+            "kullaniciadi": "K5 SERVİS",
+            "sifre": "elif",
+            "kullanici": "K5",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 365,
+        "fields": {
+            "kullaniciadi": "M.AMELİYATHANE",
+            "sifre": "12345",
+            "kullanici": "MAT",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 369,
+        "fields": {
+            "kullaniciadi": "M.YOGUNBAKIM",
+            "sifre": "1212",
+            "kullanici": "MYB",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 372,
+        "fields": {
+            "kullaniciadi": "FİGEN ŞENGÜR",
+            "sifre": "FİGEN",
+            "kullanici": "FN",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 401,
+        "fields": {
+            "kullaniciadi": "ADEM DİKER",
+            "sifre": "ADEM",
+            "kullanici": "ADK",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 407,
+        "fields": {
+            "kullaniciadi": "K6.KAT",
+            "sifre": "123456",
+            "kullanici": "K6",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 415,
+        "fields": {
+            "kullaniciadi": "DİLAY KARAKUŞ",
+            "sifre": "DİLAY",
+            "kullanici": "DK",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 417,
+        "fields": {
+            "kullaniciadi": "VİP SERVİS",
+            "sifre": "A9SUİT.",
+            "kullanici": "VİP",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 426,
+        "fields": {
+            "kullaniciadi": "A4 SERVİS",
+            "sifre": "A4",
+            "kullanici": "A4",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 430,
+        "fields": {
+            "kullaniciadi": "A5 SERVİS",
+            "sifre": "a512345",
+            "kullanici": "A5",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 431,
+        "fields": {
+            "kullaniciadi": "A6 SERVİS",
+            "sifre": "1234567.",
+            "kullanici": "A6",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 433,
+        "fields": {
+            "kullaniciadi": "A7 SERVİS",
+            "sifre": "gökçe",
+            "kullanici": "A7",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 434,
+        "fields": {
+            "kullaniciadi": "A8 SERVİS",
+            "sifre": "ABLOK.8",
+            "kullanici": "AS8",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 435,
+        "fields": {
+            "kullaniciadi": "B4 SERVİS",
+            "sifre": "123456B4",
+            "kullanici": "B4",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 436,
+        "fields": {
+            "kullaniciadi": "B5 SERVİS",
+            "sifre": "5SERVİS",
+            "kullanici": "B5",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 437,
+        "fields": {
+            "kullaniciadi": "B6 SERVİS",
+            "sifre": "123456B6",
+            "kullanici": "B6",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 448,
+        "fields": {
+            "kullaniciadi": "K.YENİDOĞAN Y.B",
+            "sifre": "yybü12",
+            "kullanici": "YYB",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 457,
+        "fields": {
+            "kullaniciadi": "GÜNÜBİRLİK SERVİS",
+            "sifre": "g6servis",
+            "kullanici": "GBS",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 549,
+        "fields": {
+            "kullaniciadi": "SARF",
+            "sifre": "SARF11321.",
+            "kullanici": "S01",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 553,
+        "fields": {
+            "kullaniciadi": "B3 SERVİS",
+            "sifre": "Bu501045",
+            "kullanici": "B3",
+            "grup": "SERVIS"
+        }
+    },
+    {
+        "model": "formedical.nurse",
+        "pk": 566,
+        "fields": {
+            "kullaniciadi": "EMRİN KÖYLÜ",
+            "sifre": "emrin.38",
+            "kullanici": "EMK",
+            "grup": "SERVIS"
+        }
+    }
+]

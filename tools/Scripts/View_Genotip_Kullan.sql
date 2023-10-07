@@ -1,0 +1,10 @@
+SELECT
+    ID,
+    KULLANICIADI,
+    SIFRE,
+    KULLANICI,
+    GRUP
+FROM
+    GEN2000.dbo.KULLAN
+WHERE
+    (GRUP = 'SERVIS')
