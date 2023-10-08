@@ -27,9 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+DJANGO_ADMIN_LOGS_ENABLED = False
 
 # Application definition
-
 INSTALLED_APPS = [
     'django_admin_logs',
     'django.contrib.humanize',
@@ -160,5 +160,9 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 DJANGO_ADMIN_LOGS_ENABLED = False
+
+LOGGING={
+    "version": 1,
+    "disable_existing_loggers": True,
+}
