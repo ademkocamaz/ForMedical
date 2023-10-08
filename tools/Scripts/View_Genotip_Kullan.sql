@@ -3,8 +3,8 @@ SELECT
     KULLANICIADI,
     SIFRE,
     KULLANICI,
+    SUPER,
+    PASIF,
     GRUP
 FROM
     GEN2000.dbo.KULLAN
-WHERE
-    (GRUP = 'SERVIS')

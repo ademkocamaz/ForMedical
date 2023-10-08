@@ -61,6 +61,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         managed = False  # Created from a view. Don't remove.
-        db_table = 'TABLE_GENOTIP_KULLAN'
+        db_table = 'VIEW_GENOTIP_KULLAN'
         verbose_name='Kullanıcı'
         verbose_name_plural='Kullanıcılar'
