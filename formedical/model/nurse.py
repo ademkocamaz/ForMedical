@@ -9,7 +9,7 @@ from django.db import models
 
 class Nurse(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    kullaniciadi = models.CharField(db_column='KULLANICIADI', max_length=50, verbose_name='Kullanıcı Adı')  # Field name made lowercase.
+    kullaniciadi = models.CharField(db_column='KULLANICIADI', max_length=50, verbose_name='Kullanıcı Adı', unique=True)  # Field name made lowercase.
     sifre = models.CharField(db_column='SIFRE', max_length=10, blank=True, null=True, verbose_name='Şifre')  # Field name made lowercase.
     kullanici = models.CharField(db_column='KULLANICI', max_length=5, blank=True, null=True, verbose_name='Kullanıcı')  # Field name made lowercase.
     grup = models.CharField(db_column='GRUP', max_length=30, blank=True, null=True, verbose_name='Grup')  # Field name made lowercase.
