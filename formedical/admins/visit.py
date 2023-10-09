@@ -1,19 +1,16 @@
 from typing import Any
 from django.contrib import admin
-from django.db.models.query import QuerySet
-from django.http.request import HttpRequest
-from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 
 from formedical.model.visit import *
 from formedical.admins.service import ServiceInline
 
-class VisitInline(NestedStackedInline):
+class VisitInline(admin.StackedInline):
     model = Visit
     readonly_fields=[field.name for field in Visit._meta.fields]
     extra=0
     max_num=0
     can_delete=False
-    
+    classes = ('collapse', 'collapse-entry', )
     inlines=[
         ServiceInline,
     ]
@@ -25,7 +22,7 @@ class VisitInline(NestedStackedInline):
     #     return qs.filter(author=request.user)
     
 @admin.register(Visit)
-class VisitAdmin(NestedModelAdmin):
+class VisitAdmin(admin.ModelAdmin):
     fields=[field.name for field in Visit._meta.fields if field.name not in 'id']
     list_display=[field.name for field in Visit._meta.fields if field.name not in 'id']
     search_fields=('dosyano',)

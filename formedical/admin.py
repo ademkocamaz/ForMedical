@@ -5,6 +5,6 @@ from .admins.patient import PatientAdmin
 from .admins.visit import VisitAdmin
 from .admins.service import ServiceAdmin
 
-admin.site.site_title='ForMedical Yönetim Paneli'
-admin.site.site_header='ForMedical'
-admin.site.index_title='ForMedical - Hemşire Formları Yönetimine, Hoşgeldiniz.'
+# admin.site.site_title='ForMedical Yönetim Paneli'
+# admin.site.site_header='ForMedical'
+# admin.site.index_title='ForMedical - Hemşire Formları Yönetimine, Hoşgeldiniz.'

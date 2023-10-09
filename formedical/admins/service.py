@@ -1,23 +1,21 @@
 from django.contrib import admin
 
-from nested_inline.admin import NestedStackedInline, NestedModelAdmin
-
 from formedical.model.service import Service
 from form.admins.pain import PainInline
 
-class ServiceInline(NestedStackedInline):
+class ServiceInline(admin.StackedInline):
     model=Service
     readonly_fields=[field.name for field in Service._meta.fields]
     extra=0
     max_num=0
     can_delete=False
-
+    classes = ('collapse','collapse-entry', )
     inlines=[
         PainInline,
     ]
 
 @admin.register(Service)
-class ServiceAdmin(NestedModelAdmin):
+class ServiceAdmin(admin.ModelAdmin):
     fields=[field.name for field in Service._meta.fields if field.name not in 'id']
     list_display=[field.name for field in Service._meta.fields if field.name not in 'id']
     search_fields=('dosyano', 'servis', 'oda')

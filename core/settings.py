@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
+    'baton',
     'crispy_forms',
     'crispy_bootstrap5',
     'django_admin_logs',
@@ -47,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # -------------------
-    
+    'baton.autodiscover',
 ]
 
 MIDDLEWARE = [
@@ -171,4 +172,18 @@ DJANGO_ADMIN_LOGS_ENABLED = False
 LOGGING={
     "version": 1,
     "disable_existing_loggers": True,
+}
+
+BATON = {
+    'SITE_HEADER': 'ForMedical',
+    'SITE_TITLE': 'ForMedical Yönetim Paneli',
+    'INDEX_TITLE': 'ForMedical - Hemşire Formları Yönetimine, Hoşgeldiniz.',
+    'LOGIN_SPLASH': '/static/login-splash.jpg',
+    'GRAVATAR_ENABLED': False,
+    'SUPPORT_HREF': 'https://www.ilkadam.com.tr',
+    'COPYRIGHT': '©2023 İLKADAM YAZILIM VE BİLİŞİM TEKNOLOJİLERİ',
+    'POWERED_BY': '<a href="https://ilkadam.com.tr">www.ilkadam.com.tr</a>',
+    # 'CHANGELIST_FILTERS_IN_MODAL': True,
+    # 'CHANGELIST_FILTERS_ALWAYS_OPEN': False,
+    # 'CHANGELIST_FILTERS_FORM': True,
 }

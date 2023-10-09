@@ -1,7 +1,6 @@
 from typing import Any
 from django.contrib import admin
 from django.http.request import HttpRequest
-from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 
 from formedical.model.patient import *
 from formedical.model.visit import *
@@ -9,7 +8,7 @@ from formedical.model.visit import *
 from formedical.admins.visit import VisitInline
 
 @admin.register(Patient)
-class PatientAdmin(NestedModelAdmin):
+class PatientAdmin(admin.ModelAdmin):
     fields=[field.name for field in Patient._meta.fields if field.name not in 'id']
     list_display=[field.name for field in Patient._meta.fields if field.name not in 'id']
     readonly_fields=[field.name for field in Patient._meta.fields if field.name not in 'id']

@@ -1,14 +1,14 @@
 from django.contrib import admin
 
-from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from django_object_actions import DjangoObjectActions, action
 
 from form.model.pain import *
 
-class PainScaleInline(NestedStackedInline):
+class PainScaleInline(admin.StackedInline):
     model = PainScale
     extra = 0
     max_num = 3
+    classes = ('collapse', 'collapse-entry', )
     # fields=('description',)
     # classes = ('collapse',)
     # fieldsets = [
@@ -21,10 +21,11 @@ class PainScaleInline(NestedStackedInline):
     #     ),
     # ]
 
-class PainPlaceInline(NestedStackedInline):
+class PainPlaceInline(admin.StackedInline):
     model = PainPlace
     extra = 0
     max_num = 3
+    classes = ('collapse', 'collapse-entry', )
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -35,10 +36,11 @@ class PainPlaceInline(NestedStackedInline):
     #     ),
     # ]
 
-class PainSeverityInline(NestedStackedInline):
+class PainSeverityInline(admin.StackedInline):
     model = PainSeverity
     extra = 0
     max_num = 3
+    classes = ('collapse', 'collapse-entry', )
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -49,10 +51,11 @@ class PainSeverityInline(NestedStackedInline):
     #     ),
     # ]
 
-class PainFrequencyInline(NestedStackedInline):
+class PainFrequencyInline(admin.StackedInline):
     model = PainFrequency
     extra = 0
     max_num = 3
+    classes = ('collapse', 'collapse-entry', )
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -63,10 +66,11 @@ class PainFrequencyInline(NestedStackedInline):
     #     ),
     # ]
 
-class PainNatureInline(NestedStackedInline):
+class PainNatureInline(admin.StackedInline):
     model = PainNature
     extra = 0
     max_num = 3
+    classes = ('collapse', 'collapse-entry', )
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -77,10 +81,11 @@ class PainNatureInline(NestedStackedInline):
     #     ),
     # ]
 
-class PainFactorAffectingInline(NestedStackedInline):
+class PainFactorAffectingInline(admin.StackedInline):
     model = PainFactorAffecting
     extra = 0
     max_num = 3
+    classes = ('collapse', 'collapse-entry', )
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -91,10 +96,11 @@ class PainFactorAffectingInline(NestedStackedInline):
     #     ),
     # ]
 
-class PainTargetedLevelInline(NestedStackedInline):
+class PainTargetedLevelInline(admin.StackedInline):
     model = PainTargetedLevel
     extra = 0
     max_num = 3
+    classes = ('collapse', 'collapse-entry', )
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -105,11 +111,12 @@ class PainTargetedLevelInline(NestedStackedInline):
     #     ),
     # ]
 
-class PainInline(NestedStackedInline):
+class PainInline(admin.StackedInline):
     model = Pain
     extra = 0
     max_num = 0
     can_delete = False
+    classes = ('collapse', 'collapse-entry', )
     # classes=('collapse','collapse-entry') çalışmadı
     # readonly_fields=[field.name for field in Pain._meta.fields]
     # classes = ('stacked_collapse', 'collapsed',) çalışmadı
@@ -151,7 +158,7 @@ class PainAdmin(DjangoObjectActions, admin.ModelAdmin):
         # from django.http import HttpResponseRedirect
         # return HttpResponseRedirect(f'https://google.com')
         
-
+    
     change_actions = ("print",)
     # changelist_actions=("print",)
     
@@ -160,6 +167,7 @@ class PainAdmin(DjangoObjectActions, admin.ModelAdmin):
     list_display_links = ('service',)
     search_fields=('service', )
 
+    
     save_on_top=True
     
     # change_form_template = "override/change_form.html"
