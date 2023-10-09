@@ -156,8 +156,9 @@ class Pain(models.Model):
 
     # endregion
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.patient.dosyano + ' - ' + self.patient.ad + ' ' + self.patient.soyad
+        
 
     class Meta:
         verbose_name = 'Ağrı Formu'

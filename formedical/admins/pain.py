@@ -139,6 +139,8 @@ class PainAdmin(DjangoObjectActions, admin.ModelAdmin):
     list_display = ("id", "patient", "edited", "created")
     list_display_links = ("id", "patient")
 
+    save_on_top=True
+
     # readonly_fields=("patient",)
     # list_editable = ('fileNumber',)
     search_fields = ('patient',)

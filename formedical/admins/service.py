@@ -1,21 +1,23 @@
-from typing import Any
 from django.contrib import admin
-from django.http.request import HttpRequest
+
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 
-from ..model.patient import *
-from ..model.visit import *
+from ..model.service import Service
 
-from ..admins.visit import VisitInline
+class ServiceInline(NestedStackedInline):
+    model=Service
+    readonly_fields=[field.name for field in Service._meta.get_fields()]
+    extra=0
+    max_num=0
+    can_delete=False
 
-@admin.register(Patient)
-class PatientAdmin(NestedModelAdmin):
-    fields=('dosyano','ad','soyad','vatandaslikno', 'cinsiyet', 'dogumtarih')
-    list_display=('dosyano','ad','soyad', 'vatandaslikno', 'cinsiyet', 'dogumtarih')
-    readonly_fields=('dosyano','ad','soyad', 'vatandaslikno', 'cinsiyet', 'dogumtarih')
+@admin.register(Service)
+class ServiceAdmin(NestedModelAdmin):
+    fields = [field.name for field in Service._meta.get_fields() if field.name not in 'id']
+    list_display=[field.name for field in Service._meta.get_fields() if field.name not in 'id']
     search_fields=('dosyano',)
+    readonly_fields=[field.name for field in Service._meta.get_fields() if field.name not in 'id']
     ordering=('-dosyano',)
-    
     def change_view(self, request, object_id, form_url="", extra_context=None):
         context = {}
         context.update(extra_context or {})
@@ -30,7 +32,3 @@ class PatientAdmin(NestedModelAdmin):
     
     change_form_template = "override/change_form.html"
     change_list_template = "override/change_list.html"
-
-    inlines=[
-        VisitInline,
-    ]

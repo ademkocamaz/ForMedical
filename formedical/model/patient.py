@@ -2,7 +2,7 @@ from django.db import models
 
 class Patient(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    dosyano = models.CharField(db_column='DOSYANO', max_length=15, verbose_name='Dosya Numarası')  # Field name made lowercase.
+    dosyano = models.CharField(db_column='DOSYANO', max_length=15, verbose_name='Dosya Numarası', unique=True)  # Field name made lowercase.
     ad = models.CharField(db_column='AD', max_length=20, blank=True, null=True, verbose_name='Adı')  # Field name made lowercase.
     soyad = models.CharField(db_column='SOYAD', max_length=20, blank=True, null=True, verbose_name='Soyadı')  # Field name made lowercase.
     dogumtarih = models.DateTimeField(db_column='DOGUMTARIH', blank=True, null=True, verbose_name='Doğum Tarihi')  # Field name made lowercase.

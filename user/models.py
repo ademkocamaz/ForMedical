@@ -14,10 +14,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     password = models.CharField(db_column='SIFRE', max_length=10, blank=True, null=True, verbose_name='Şifre')  # Field name made lowercase.
     user = models.CharField(db_column='KULLANICI', max_length=5, blank=True, null=True, verbose_name='Kullanıcı')  # Field name made lowercase.
     group = models.CharField(db_column='GRUP', max_length=30, blank=True, null=True, verbose_name='Grup')  # Field name made lowercase.
-    is_inactive=models.BooleanField(db_column='PASIF', default=False,verbose_name='Pasif ?')
+    is_inactive = models.BooleanField(db_column='PASIF', default=False,verbose_name='Pasif ?', blank=True, null=True)
     is_admin = True
     is_superuser = models.BooleanField(db_column='SUPER', default=False)
-    last_login=None
+    last_login = None
+
+    
+
     objects=UserManager()
 
     USERNAME_FIELD = "username"
