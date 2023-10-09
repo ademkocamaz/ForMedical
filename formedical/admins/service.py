@@ -2,7 +2,8 @@ from django.contrib import admin
 
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 
-from ..model.service import Service
+from formedical.model.service import Service
+from form.admins.pain import PainInline
 
 class ServiceInline(NestedStackedInline):
     model=Service
@@ -11,12 +12,17 @@ class ServiceInline(NestedStackedInline):
     max_num=0
     can_delete=False
 
+    inlines=[
+        PainInline,
+    ]
+
 @admin.register(Service)
 class ServiceAdmin(NestedModelAdmin):
     fields=[field.name for field in Service._meta.fields if field.name not in 'id']
     list_display=[field.name for field in Service._meta.fields if field.name not in 'id']
-    search_fields=('visit',)
+    search_fields=('dosyano', 'servis', 'oda')
     list_display_links=('visit',)
+    list_filter=('giristarih', 'servis')
     readonly_fields=[field.name for field in Service._meta.fields if field.name not in 'id']
     ordering=('-giristarih', '-dosyano',)
 
@@ -34,3 +40,7 @@ class ServiceAdmin(NestedModelAdmin):
     
     change_form_template = "override/change_form.html"
     change_list_template = "override/change_list.html"
+
+    inlines=[
+        PainInline,
+    ]

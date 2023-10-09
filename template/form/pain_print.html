@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load humanize crispy_forms_tags %}
+
+{% block title %}
+  Ağrı Değerlendirme ve Takip Formu
+{% endblock %}
+
+{% block content %}
+  {{ pain_form }}
+  {% for field in form %}
+    <div>
+      {% if not line.fields|length == 1 and not field.is_readonly %}{{ field.errors }}{% endif %}
+
+      <div class="flex-container">
+        {% if field.is_checkbox %}
+          {{ field.field }}{{ field.label_tag }}
+        {% else %}
+          {{ field.label_tag }}
+          <div class="readonly">{{ field.contents }}</div>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}

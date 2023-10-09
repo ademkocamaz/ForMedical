@@ -3,11 +3,11 @@ from django.contrib import admin
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 from django_object_actions import DjangoObjectActions, action
 
-from ..model.pain import *
+from form.model.pain import *
 
 class PainScaleInline(NestedStackedInline):
     model = PainScale
-    extra = 1
+    extra = 0
     max_num = 3
     # fields=('description',)
     # classes = ('collapse',)
@@ -23,7 +23,7 @@ class PainScaleInline(NestedStackedInline):
 
 class PainPlaceInline(NestedStackedInline):
     model = PainPlace
-    extra = 1
+    extra = 0
     max_num = 3
     # fieldsets = [
     #     (
@@ -37,7 +37,7 @@ class PainPlaceInline(NestedStackedInline):
 
 class PainSeverityInline(NestedStackedInline):
     model = PainSeverity
-    extra = 1
+    extra = 0
     max_num = 3
     # fieldsets = [
     #     (
@@ -51,7 +51,7 @@ class PainSeverityInline(NestedStackedInline):
 
 class PainFrequencyInline(NestedStackedInline):
     model = PainFrequency
-    extra = 1
+    extra = 0
     max_num = 3
     # fieldsets = [
     #     (
@@ -65,7 +65,7 @@ class PainFrequencyInline(NestedStackedInline):
 
 class PainNatureInline(NestedStackedInline):
     model = PainNature
-    extra = 1
+    extra = 0
     max_num = 3
     # fieldsets = [
     #     (
@@ -79,7 +79,7 @@ class PainNatureInline(NestedStackedInline):
 
 class PainFactorAffectingInline(NestedStackedInline):
     model = PainFactorAffecting
-    extra = 1
+    extra = 0
     max_num = 3
     # fieldsets = [
     #     (
@@ -93,7 +93,7 @@ class PainFactorAffectingInline(NestedStackedInline):
 
 class PainTargetedLevelInline(NestedStackedInline):
     model = PainTargetedLevel
-    extra = 1
+    extra = 0
     max_num = 3
     # fieldsets = [
     #     (
@@ -108,8 +108,10 @@ class PainTargetedLevelInline(NestedStackedInline):
 class PainInline(NestedStackedInline):
     model = Pain
     extra = 0
-    max_num=0
-    can_delete=False
+    max_num = 0
+    can_delete = False
+    # classes=('collapse','collapse-entry') çalışmadı
+    # readonly_fields=[field.name for field in Pain._meta.fields]
     # classes = ('stacked_collapse', 'collapsed',) çalışmadı
     # fieldsets = [
     #     (
@@ -120,7 +122,6 @@ class PainInline(NestedStackedInline):
     #         },
     #     ),
     # ]
-    # classes=('collapse','collapsed')
 
     inlines = [
         PainScaleInline,
@@ -139,23 +140,37 @@ class PainAdmin(DjangoObjectActions, admin.ModelAdmin):
         # description="Geçerli Kaydı Yazdırmak için Yeni Pencere açılır."
     )
     def print(self, request, obj):
+        from django.shortcuts import render
+        from form.form.pain import PainForm
+        painForm = PainForm()
+    
+        context = {
+            'pain_form': painForm,
+        }
+        return render(request=request, template_name='form/pain_print.html', context=context)
         # from django.http import HttpResponseRedirect
         # return HttpResponseRedirect(f'https://google.com')
-        pass
+        
 
     change_actions = ("print",)
+    # changelist_actions=("print",)
+    
     fields=[field.name for field in Pain._meta.fields if field.name not in ('id', 'edited', 'created')]
     list_display = [field.name for field in Pain._meta.fields if field.name not in ('id', 'edited', 'created')]
-    list_display_links = ("patient",)
+    list_display_links = ('service',)
+    search_fields=('service', )
 
     save_on_top=True
     
-
+    # change_form_template = "override/change_form.html"
+    # change_list_template = "override/change_list.html"
+    
     # readonly_fields=("patient",)
     # list_editable = ('fileNumber',)
-    search_fields = ('patient',)
     
-    autocomplete_fields = ('patient',)
+    search_fields = ('service',)
+    
+    autocomplete_fields = ('service',)
 
     inlines = [
         PainScaleInline,

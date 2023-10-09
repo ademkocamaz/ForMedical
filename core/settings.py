@@ -27,16 +27,18 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-DJANGO_ADMIN_LOGS_ENABLED = False
 
 # Application definition
 INSTALLED_APPS = [
+    'crispy_forms',
+    'crispy_bootstrap5',
     'django_admin_logs',
     'django.contrib.humanize',
     'nested_inline',
     'django_object_actions',
     'user',
     'formedical',
+    'form',
     # -------------------
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # -------------------
+    
 ]
 
 MIDDLEWARE = [
@@ -159,6 +162,9 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 DJANGO_ADMIN_LOGS_ENABLED = False
 

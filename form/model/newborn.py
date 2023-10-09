@@ -1,5 +1,5 @@
 from django.db import models
-from ..model.patient import Patient
+from formedical.model.service import Service
 
 class NewBorn(models.Model):
     pass

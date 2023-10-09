@@ -32,7 +32,7 @@ class Service(models.Model):
     cikistarih = models.DateTimeField(db_column='CIKISTARIH', verbose_name='Çıkış Tarihi', blank=True, null=True)  # Field name made lowercase.
 
     def __str__(self) -> str:
-        return 'Dosya No: ' + str(self.dosyano) + ' - Geliş No: ' + str(self.gelisno)+' Oda: ' + str(self.oda)+' Yatak:' + str(self.yatak) 
+        return 'Dosya No: ' + str(self.dosyano) +' Oda: ' + str(self.oda)+' Yatak: ' + str(self.yatak) # + ' Giriş: '+ str(self.giristarih.strftime('%d.%m.%Y') if self.giristarih.strftime('%d.%m.%Y') is None else 'Girilmemiş')
 
     class Meta:
         managed = False  # Created from a view. Don't remove.

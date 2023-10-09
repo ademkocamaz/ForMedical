@@ -1,5 +1,5 @@
 from django.db import models
-from ..model.service import Service
+from formedical.model.service import Service
 
 class Pain(models.Model):
     # patient = models.ForeignKey(
@@ -157,7 +157,7 @@ class Pain(models.Model):
     # endregion
 
     def __str__(self) -> str:
-        return self.patient.dosyano + ' - ' + self.patient.ad + ' ' + self.patient.soyad
+        return 'Dosya No: ' + str(self.service.dosyano) +' Oda: ' + str(self.service.oda)+' Yatak:' + str(self.service.yatak)
         
 
     class Meta:

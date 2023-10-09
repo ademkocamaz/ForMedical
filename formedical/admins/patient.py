@@ -3,10 +3,10 @@ from django.contrib import admin
 from django.http.request import HttpRequest
 from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 
-from ..model.patient import *
-from ..model.visit import *
+from formedical.model.patient import *
+from formedical.model.visit import *
 
-from ..admins.visit import VisitInline
+from formedical.admins.visit import VisitInline
 
 @admin.register(Patient)
 class PatientAdmin(NestedModelAdmin):

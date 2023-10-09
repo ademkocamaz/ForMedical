@@ -2,10 +2,10 @@ from typing import Any
 from django.contrib import admin
 from django.db.models.query import QuerySet
 from django.http.request import HttpRequest
-from nested_inline.admin import NestedStackedInline
+from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 
-from ..model.visit import *
-from ..admins.service import ServiceInline
+from formedical.model.visit import *
+from formedical.admins.service import ServiceInline
 
 class VisitInline(NestedStackedInline):
     model = Visit
@@ -25,7 +25,7 @@ class VisitInline(NestedStackedInline):
     #     return qs.filter(author=request.user)
     
 @admin.register(Visit)
-class VisitAdmin(admin.ModelAdmin):
+class VisitAdmin(NestedModelAdmin):
     fields=[field.name for field in Visit._meta.fields if field.name not in 'id']
     list_display=[field.name for field in Visit._meta.fields if field.name not in 'id']
     search_fields=('dosyano',)
@@ -47,3 +47,7 @@ class VisitAdmin(admin.ModelAdmin):
     
     change_form_template = "override/change_form.html"
     change_list_template = "override/change_list.html"
+
+    inlines=[
+        ServiceInline,
+    ]
