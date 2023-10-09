@@ -6,18 +6,20 @@ from ..model.service import Service
 
 class ServiceInline(NestedStackedInline):
     model=Service
-    readonly_fields=[field.name for field in Service._meta.get_fields()]
+    readonly_fields=[field.name for field in Service._meta.fields]
     extra=0
     max_num=0
     can_delete=False
 
 @admin.register(Service)
 class ServiceAdmin(NestedModelAdmin):
-    fields = [field.name for field in Service._meta.get_fields() if field.name not in 'id']
-    list_display=[field.name for field in Service._meta.get_fields() if field.name not in 'id']
-    search_fields=('dosyano',)
-    readonly_fields=[field.name for field in Service._meta.get_fields() if field.name not in 'id']
-    ordering=('-dosyano',)
+    fields=[field.name for field in Service._meta.fields if field.name not in 'id']
+    list_display=[field.name for field in Service._meta.fields if field.name not in 'id']
+    search_fields=('visit',)
+    list_display_links=('visit',)
+    readonly_fields=[field.name for field in Service._meta.fields if field.name not in 'id']
+    ordering=('-giristarih', '-dosyano',)
+
     def change_view(self, request, object_id, form_url="", extra_context=None):
         context = {}
         context.update(extra_context or {})

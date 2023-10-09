@@ -8,6 +8,7 @@ from ..model.pain import *
 class PainScaleInline(NestedStackedInline):
     model = PainScale
     extra = 1
+    max_num = 3
     # fields=('description',)
     # classes = ('collapse',)
     # fieldsets = [
@@ -23,6 +24,7 @@ class PainScaleInline(NestedStackedInline):
 class PainPlaceInline(NestedStackedInline):
     model = PainPlace
     extra = 1
+    max_num = 3
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -36,6 +38,7 @@ class PainPlaceInline(NestedStackedInline):
 class PainSeverityInline(NestedStackedInline):
     model = PainSeverity
     extra = 1
+    max_num = 3
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -49,6 +52,7 @@ class PainSeverityInline(NestedStackedInline):
 class PainFrequencyInline(NestedStackedInline):
     model = PainFrequency
     extra = 1
+    max_num = 3
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -62,6 +66,7 @@ class PainFrequencyInline(NestedStackedInline):
 class PainNatureInline(NestedStackedInline):
     model = PainNature
     extra = 1
+    max_num = 3
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -75,6 +80,7 @@ class PainNatureInline(NestedStackedInline):
 class PainFactorAffectingInline(NestedStackedInline):
     model = PainFactorAffecting
     extra = 1
+    max_num = 3
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -88,6 +94,7 @@ class PainFactorAffectingInline(NestedStackedInline):
 class PainTargetedLevelInline(NestedStackedInline):
     model = PainTargetedLevel
     extra = 1
+    max_num = 3
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -100,7 +107,9 @@ class PainTargetedLevelInline(NestedStackedInline):
 
 class PainInline(NestedStackedInline):
     model = Pain
-    extra = 1
+    extra = 0
+    max_num=0
+    can_delete=False
     # classes = ('stacked_collapse', 'collapsed',) çalışmadı
     # fieldsets = [
     #     (
@@ -135,11 +144,12 @@ class PainAdmin(DjangoObjectActions, admin.ModelAdmin):
         pass
 
     change_actions = ("print",)
-    
-    list_display = ("id", "patient", "edited", "created")
-    list_display_links = ("id", "patient")
+    fields=[field.name for field in Pain._meta.fields if field.name not in ('id', 'edited', 'created')]
+    list_display = [field.name for field in Pain._meta.fields if field.name not in ('id', 'edited', 'created')]
+    list_display_links = ("patient",)
 
     save_on_top=True
+    
 
     # readonly_fields=("patient",)
     # list_editable = ('fileNumber',)

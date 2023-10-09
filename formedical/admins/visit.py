@@ -5,13 +5,18 @@ from django.http.request import HttpRequest
 from nested_inline.admin import NestedStackedInline
 
 from ..model.visit import *
+from ..admins.service import ServiceInline
 
 class VisitInline(NestedStackedInline):
     model = Visit
-    readonly_fields=[field.name for field in Visit._meta.get_fields()]
+    readonly_fields=[field.name for field in Visit._meta.fields]
     extra=0
     max_num=0
     can_delete=False
+    
+    inlines=[
+        ServiceInline,
+    ]
 
     # def get_queryset(self, request):
     #     qs = super().get_queryset(request)
@@ -21,12 +26,12 @@ class VisitInline(NestedStackedInline):
     
 @admin.register(Visit)
 class VisitAdmin(admin.ModelAdmin):
-    fields = [field.name for field in Visit._meta.get_fields() if field.name not in 'id']
-    list_display=[field.name for field in Visit._meta.get_fields() if field.name not in 'id']
+    fields=[field.name for field in Visit._meta.fields if field.name not in 'id']
+    list_display=[field.name for field in Visit._meta.fields if field.name not in 'id']
     search_fields=('dosyano',)
     # autocomplete_fields = ('patient',)
-    readonly_fields=[field.name for field in Visit._meta.get_fields() if field.name not in 'id']
-    ordering=('-dosyano',)
+    readonly_fields=[field.name for field in Visit._meta.fields if field.name not in 'id']
+    ordering=('-giristarih', '-dosyano',)
 
     def change_view(self, request, object_id, form_url="", extra_context=None):
         context = {}

@@ -1,5 +1,5 @@
 from django.db import models
-from ..model.patient import Patient
+from ..model.service import Service
 
 class Pain(models.Model):
     # patient = models.ForeignKey(
@@ -7,10 +7,10 @@ class Pain(models.Model):
     #     on_delete=models.DO_NOTHING,
     #     verbose_name='Dosya Numarası'
     # )
-    patient = models.ForeignKey(
-        Patient,
+    service = models.ForeignKey(
+        Service,
         on_delete=models.DO_NOTHING,
-        verbose_name='Hasta Bilgileri',
+        verbose_name='Servis Bilgileri',
         db_constraint=False,
         # editable=False
     )

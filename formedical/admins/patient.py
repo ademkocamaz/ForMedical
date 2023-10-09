@@ -10,9 +10,9 @@ from ..admins.visit import VisitInline
 
 @admin.register(Patient)
 class PatientAdmin(NestedModelAdmin):
-    fields=('dosyano','ad','soyad','vatandaslikno', 'cinsiyet', 'dogumtarih')
-    list_display=('dosyano','ad','soyad', 'vatandaslikno', 'cinsiyet', 'dogumtarih')
-    readonly_fields=('dosyano','ad','soyad', 'vatandaslikno', 'cinsiyet', 'dogumtarih')
+    fields=[field.name for field in Patient._meta.fields if field.name not in 'id']
+    list_display=[field.name for field in Patient._meta.fields if field.name not in 'id']
+    readonly_fields=[field.name for field in Patient._meta.fields if field.name not in 'id']
     search_fields=('dosyano',)
     ordering=('-dosyano',)
     

@@ -11,14 +11,15 @@ from .visit import Visit
 
 class Service(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    gelis = models.ForeignKey(
+    visit = models.ForeignKey(
         Visit,
         on_delete=models.DO_NOTHING,
         db_column='GELISID',
         to_field='id', 
         blank=True, 
         null=True,
-        db_constraint=False
+        db_constraint=False,
+        verbose_name='Geliş Bilgileri'
     )  # Field name made lowercase.
     dosyano = models.CharField(db_column='DOSYANO', max_length=15, verbose_name='Dosya Numarası')  # Field name made lowercase.
     gelisno = models.SmallIntegerField(db_column='GELISNO', verbose_name='Geliş No')  # Field name made lowercase.
@@ -29,6 +30,9 @@ class Service(models.Model):
     hemsire = models.CharField(db_column='HEMSIRE', verbose_name='Hemşire', max_length=25, blank=True, null=True)  # Field name made lowercase.
     giristarih = models.DateTimeField(db_column='GIRISTARIH', verbose_name='Giriş Tarihi', blank=True, null=True)  # Field name made lowercase.
     cikistarih = models.DateTimeField(db_column='CIKISTARIH', verbose_name='Çıkış Tarihi', blank=True, null=True)  # Field name made lowercase.
+
+    def __str__(self) -> str:
+        return 'Dosya No: ' + str(self.dosyano) + ' - Geliş No: ' + str(self.gelisno)+' Oda: ' + str(self.oda)+' Yatak:' + str(self.yatak) 
 
     class Meta:
         managed = False  # Created from a view. Don't remove.
