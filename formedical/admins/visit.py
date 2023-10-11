@@ -10,7 +10,7 @@ class VisitInline(admin.StackedInline):
     extra=0
     max_num=0
     can_delete=False
-    classes = ('collapse', 'collapse-entry', )
+    classes = ('collapse-entry', )
     inlines=[
         ServiceInline,
     ]

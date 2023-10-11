@@ -8,7 +8,7 @@ class PainScaleInline(admin.StackedInline):
     model = PainScale
     extra = 0
     max_num = 3
-    classes = ('collapse', 'collapse-entry', )
+    classes = ('collapse-entry', )
     # fields=('description',)
     # classes = ('collapse',)
     # fieldsets = [
@@ -25,7 +25,7 @@ class PainPlaceInline(admin.StackedInline):
     model = PainPlace
     extra = 0
     max_num = 3
-    classes = ('collapse', 'collapse-entry', )
+    classes = ('collapse-entry', )
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -40,7 +40,7 @@ class PainSeverityInline(admin.StackedInline):
     model = PainSeverity
     extra = 0
     max_num = 3
-    classes = ('collapse', 'collapse-entry', )
+    classes = ('collapse-entry', )
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -55,7 +55,7 @@ class PainFrequencyInline(admin.StackedInline):
     model = PainFrequency
     extra = 0
     max_num = 3
-    classes = ('collapse', 'collapse-entry', )
+    classes = ('collapse-entry', )
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -70,7 +70,7 @@ class PainNatureInline(admin.StackedInline):
     model = PainNature
     extra = 0
     max_num = 3
-    classes = ('collapse', 'collapse-entry', )
+    classes = ('collapse-entry', )
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -85,7 +85,7 @@ class PainFactorAffectingInline(admin.StackedInline):
     model = PainFactorAffecting
     extra = 0
     max_num = 3
-    classes = ('collapse', 'collapse-entry', )
+    classes = ('collapse-entry', )
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -100,7 +100,7 @@ class PainTargetedLevelInline(admin.StackedInline):
     model = PainTargetedLevel
     extra = 0
     max_num = 3
-    classes = ('collapse', 'collapse-entry', )
+    classes = ('collapse-entry', )
     # fieldsets = [
     #     (
     #         "Bilgiler",
@@ -116,7 +116,7 @@ class PainInline(admin.StackedInline):
     extra = 0
     max_num = 0
     can_delete = False
-    classes = ('collapse', 'collapse-entry', )
+    classes = ('collapse-entry', )
     # classes=('collapse','collapse-entry') çalışmadı
     # readonly_fields=[field.name for field in Pain._meta.fields]
     # classes = ('stacked_collapse', 'collapsed',) çalışmadı

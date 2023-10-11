@@ -1,0 +1,1 @@
+pyinstaller --name ForMedical --onefile --splash .\logo_256x256.jpg --icon .\logo_256x256.ico --uac-admin .\manage.py

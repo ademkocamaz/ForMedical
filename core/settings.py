@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-@-h+de%7g$o=1n%z8$x4c)lsk*9^%3!jk3d^b3tjrlacdpi**^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -169,10 +169,12 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 DJANGO_ADMIN_LOGS_ENABLED = False
 
-LOGGING={
-    "version": 1,
-    "disable_existing_loggers": True,
-}
+LOGGING_CONFIG = None
+
+# LOGGING={
+#     "version": 1,
+#     "disable_existing_loggers": True,
+# }
 
 BATON = {
     'SITE_HEADER': 'ForMedical',
