@@ -1,5 +1,6 @@
 from django.db import models
 from formedical.model.service import Service
+from django.conf import settings
 
 class Pain(models.Model):
     # patient = models.ForeignKey(
@@ -25,6 +26,13 @@ class Pain(models.Model):
         verbose_name='Oluşturulma Tarihi'
     )
 
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL, 
+        on_delete=models.DO_NOTHING, 
+        verbose_name='Kullanıcı',
+        db_constraint=False,
+        # default=
+    )
     # region Scale
 
     # region numericalPainScale

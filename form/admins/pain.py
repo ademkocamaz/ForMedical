@@ -1,3 +1,4 @@
+from typing import Any
 from django.contrib import admin
 
 from django_object_actions import DjangoObjectActions, action
@@ -157,17 +158,22 @@ class PainAdmin(DjangoObjectActions, admin.ModelAdmin):
         return render(request=request, template_name='form/pain_print.html', context=context)
         # from django.http import HttpResponseRedirect
         # return HttpResponseRedirect(f'https://google.com')
-        
+
+    def save_model(self, request, obj, form, change):
+        """
+        Given a model instance save it to the database.
+        """
+        obj.user=request.user
+        obj.save()    
     
     change_actions = ("print",)
     # changelist_actions=("print",)
     
-    fields=[field.name for field in Pain._meta.fields if field.name not in ('id', 'edited', 'created')]
-    list_display = [field.name for field in Pain._meta.fields if field.name not in ('id', 'edited', 'created')]
+    fields=[field.name for field in Pain._meta.fields if field.name not in ('id', 'edited', 'created', 'user')]
+    list_display = [field.name for field in Pain._meta.fields if field.name in ('service', 'edited', 'created', 'user')]
     list_display_links = ('service',)
     search_fields=('service', )
 
-    
     save_on_top=True
     
     # change_form_template = "override/change_form.html"
