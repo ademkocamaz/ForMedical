@@ -177,7 +177,8 @@ class PainScale(models.Model):
     pain = models.ForeignKey(
         Pain,
         on_delete=models.CASCADE,
-        verbose_name='Ağrı Formu'
+        verbose_name='Ağrı Formu',
+        related_name='painScales',
     )
 
     description = models.TextField(

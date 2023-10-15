@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load verbose_name %}
+
+{% block title %}Ağrı Formu - {{ pain.service }}{% endblock title %}
+
+{% block content %}
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <div class="row align-items-center text-center">
+          <div class="col">
+            <img src="{% static 'logo_100x100.png' %}" alt="" />
+          </div>
+          <div class="col">AĞRI DEĞERLENDİRME VE TAKİP FORMU</div>
+          <div class="col">
+            <img src="{% static 'saglik-bakanligi-logo_100x100.png' %}" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row align-items-center text-center">
+    <div class="col">Döküman No: HB.FR.35</div>
+    <div class="col">Yayın Tarihi: 12.03.2016</div>
+    <div class="col">Revizyon No: 00</div>
+    <div class="col">Revizyon Tarihi:</div>
+    <div class="col">Sayfa No: 2/1</div>
+  </div>
+
+  <div class="row align-items-start">
+    <div class="col-4">
+      <div class="card">
+        <div class="card-body">
+
+          <h5 class="card-title text-center">HASTA BİLGİLERİ</h5>
+
+          <div class="row">
+            <div class="row border">
+              <div class="col">Adı ve Soyadı:</div>
+              <div class="col">{{ pain.service.visit.patient.ad }} {{ pain.service.visit.patient.soyad }}</div>
+            </div>
+
+            <div class="row border">
+              <div class="col">Dosya Numarası:</div>
+              <div class="col">{{ pain.service.dosyano }}</div>
+            </div>
+            
+            <div class="row border">
+              <div class="col">Doğum Tarihi:</div>
+              <div class="col">{{ pain.service.visit.patient.dogumtarih.date }}</div>
+            </div>
+
+            <div class="row border">
+              <div class="col">T.C. Kimlik Numarası:</div>
+              <div class="col">{{ pain.service.visit.patient.vatandaslikno }}</div>
+            </div>
+            
+            <div class="row border">
+              <div class="col">Cinsiyeti:</div>
+              <div class="col">{{ pain.service.visit.patient.cinsiyet }}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="row">
+        <div class="card">
+          <div class="card-body p-0">
+            <h5 class="card-title">NUMERİK AĞRI SKALASI: 14 YAŞ ÜZERİ VE İLETİŞİM KURULABİLEN HASTALARDA KULLANILIR.</h5>
+            {% field_verbose_name pain 'numericalPainScale' %}:<p class="fs-5">{{ pain.get_numericalPainScale_display }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card">
+          <div class="card-body p-0">
+            <h5 class="card-title">YÜZ SKALASI: 3-14 YAŞ ARASI HASTALARDA KULLANILIR.</h5>
+            {% field_verbose_name pain 'wongBakerFacesPainScale' %}:<p class="fs-5">{{ pain.get_wongBakerFacesPainScale_display }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row align-items-start">
+    <div class="card">
+      <div class="card-body p-0">
+        <h5 class="card-title text-center">DAVRANIŞSAL AĞRI SKALASI</h5>
+        <div class="row">
+          <div class="col">
+            {% field_verbose_name pain 'behavioralFaceExpressionPainScale' %}:<p class="fs-5">{{ pain.get_behavioralFaceExpressionPainScale_display }}</p>
+            {% field_verbose_name pain 'behavioralLegMovementsPainScale' %}:<p class="fs-5">{{ pain.get_behavioralLegMovementsPainScale_display }}</p>
+            {% field_verbose_name pain 'behavioralActivityPainScale' %}:<p class="fs-5">{{ pain.get_behavioralActivityPainScale_display }}</p>
+          </div>
+          <div class="col">
+            {% field_verbose_name pain 'behavioralCryPainScale' %}:<p class="fs-5">{{ pain.get_behavioralCryPainScale_display }}</p>
+            {% field_verbose_name pain 'behavioralComfortedPainScale' %}:<p class="fs-5">{{ pain.get_behavioralComfortedPainScale_display }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if painScales %}
+    <div class="row align-items-start">
+      <div class="card">
+        <div class="card-body p-0">
+          <h5 class="card-title">{% verbose_name_plural painScales.first %}</h5>
+          {% for painScale in painScales %}
+            <div class="row">
+              <div class="col">
+                {% field_verbose_name painScale 'description' %}:<p class="fs-5">{{ painScale.description }}</p>
+              </div>
+              <div class="col">
+                {% field_verbose_name painScale 'date' %}:<p class="fs-5">{{ painScale.date }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if painPlaces %}
+    <div class="row align-items-start">
+      <div class="card">
+        <div class="card-body p-0">
+          <h5 class="card-title">{% verbose_name_plural painPlaces.first %}</h5>
+          {% for painPlace in painPlaces %}
+            <div class="row">
+              <div class="col">
+                {% field_verbose_name painPlace 'description' %}:<p class="fs-5">{{ painPlace.description }}</p>
+              </div>
+              <div class="col">
+                {% field_verbose_name painPlace 'date' %}:<p class="fs-5">{{ painPlace.date }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if painSeverities %}
+    <div class="row align-items-start">
+      <div class="card">
+        <div class="card-body p-0">
+          <h5 class="card-title">{% verbose_name_plural painSeverities.first %}</h5>
+          {% for painSeverity in painSeverities %}
+            <div class="row">
+              <div class="col">
+                {% field_verbose_name painSeverity 'description' %}:<p class="fs-5">{{ painSeverity.description }}</p>
+              </div>
+              <div class="col">
+                {% field_verbose_name painSeverity 'date' %}:<p class="fs-5">{{ painSeverity.date }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if painFrequencies %}
+    <div class="row align-items-start">
+      <div class="card">
+        <div class="card-body p-0">
+          <h5 class="card-title">{% verbose_name_plural painFrequencies.first %}</h5>
+          {% for painFrequency in painFrequencies %}
+            <div class="row">
+              <div class="col">
+                {% field_verbose_name painFrequency 'description' %}:<p class="fs-5">{{ painFrequency.description }}</p>
+              </div>
+              <div class="col">
+                {% field_verbose_name painFrequency 'date' %}:<p class="fs-5">{{ painFrequency.date }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if painNatures %}
+    <div class="row align-items-start">
+      <div class="card">
+        <div class="card-body p-0">
+          <h5 class="card-title">{% verbose_name_plural painNatures.first %}</h5>
+          {% for painNature in painNatures %}
+            <div class="row">
+              <div class="col">
+                {% field_verbose_name painNature 'description' %}:<p class="fs-5">{{ painNature.description }}</p>
+              </div>
+              <div class="col">
+                {% field_verbose_name painNature 'date' %}:<p class="fs-5">{{ painNature.date }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if painFactorAffectings %}
+    <div class="row align-items-start">
+      <div class="card">
+        <div class="card-body p-0">
+          <h5 class="card-title">{% verbose_name_plural painFactorAffectings.first %}</h5>
+          {% for painFactorAffecting in painFactorAffectings %}
+            <div class="row">
+              <div class="col">
+                {% field_verbose_name painFactorAffecting 'description' %}:<p class="fs-5">{{ painFactorAffecting.description }}</p>
+              </div>
+              <div class="col">
+                {% field_verbose_name painFactorAffecting 'date' %}:<p class="fs-5">{{ painFactorAffecting.date }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if painTargetedLevels %}
+    <div class="row align-items-start">
+      <div class="card">
+        <div class="card-body p-0">
+          <h5 class="card-title">{% verbose_name_plural painTargetedLevels.first %}</h5>
+          {% for painTargetedLevel in painTargetedLevels %}
+            <div class="row">
+              <div class="col">
+                {% field_verbose_name painTargetedLevel 'description' %}:<p class="fs-5">{{ painTargetedLevel.description }}</p>
+              </div>
+              <div class="col">
+                {% field_verbose_name painTargetedLevel 'date' %}:<p class="fs-5">{{ painTargetedLevel.date }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
