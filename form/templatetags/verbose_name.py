@@ -1,5 +1,4 @@
 from django import template
-from multipledispatch import dispatch
 
 register = template.Library()
 

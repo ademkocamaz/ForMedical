@@ -33,13 +33,7 @@ INSTALLED_APPS = [
     'baton',
     'crispy_forms',
     'crispy_bootstrap5',
-    'django_admin_logs',
-    'django.contrib.humanize',
-    'nested_inline',
     'django_object_actions',
-    'user',
-    'formedical',
-    'form',
     # -------------------
     'django.contrib.admin',
     'django.contrib.auth',
@@ -48,6 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # -------------------
+    'django.contrib.humanize',
+    'app',
+    'genotip',
+    'form',
     'baton.autodiscover',
 ]
 
@@ -62,7 +60,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'core.urls'
-AUTH_USER_MODEL = 'user.User'
+AUTH_USER_MODEL = 'genotip.User'
 
 TEMPLATES = [
     {
@@ -167,9 +165,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-DJANGO_ADMIN_LOGS_ENABLED = False
+# DJANGO_ADMIN_LOGS_ENABLED = False
 
-LOGGING_CONFIG = None
+# LOGGING_CONFIG = None
 
 # LOGGING={
 #     "version": 1,

@@ -1,5 +1,5 @@
 from django.db import models
-from formedical.model.service import Service
+from genotip.model.service import Service
 from django.conf import settings
 
 class Pain(models.Model):

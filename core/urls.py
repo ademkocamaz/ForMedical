@@ -19,8 +19,10 @@ from django.urls import path, include
 from django.shortcuts import redirect
 
 urlpatterns = [
-    path('', lambda request: redirect('admin/', permanent=True)),
-    path('admin/', admin.site.urls),
-    path('baton/', include('baton.urls')),
-    # path('admin/', admin.site.urls),
+    # path('', lambda request: redirect('admin/', permanent=True)),
+    path(route='', view=include('app.urls')),
+    path(route='login/', view=include('genotip.urls')),
+
+    path(route='admin/', view=admin.site.urls),
+    path(route='baton/', view=include('baton.urls')),
 ]
