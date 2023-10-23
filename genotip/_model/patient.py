@@ -9,7 +9,7 @@ class Patient(models.Model):
     cinsiyet = models.CharField(db_column='CINSIYET', max_length=5, blank=True, null=True, verbose_name='Cinsiyeti')  # Field name made lowercase.
     vatandaslikno = models.CharField(db_column='VATANDASLIKNO', max_length=50, blank=True, null=True, verbose_name='Vatandaşlık Numarası')  # Field name made lowercase.
 
-    def __str__(self) -> str:
+    def __str__(self):
         return 'TCKN: ' + self.vatandaslikno + ' Dosya No: '+self.dosyano + ' Adı: ' + self.ad + ' Soyadı: ' + self.soyad
     
     class Meta:

@@ -33,7 +33,7 @@ class Visit(models.Model):
     icdadi = models.CharField(db_column='ICDADI', max_length=200, blank=True, null=True, verbose_name='ICD Adı')  # Field name made lowercase.
     # sonuc = models.CharField(db_column='SONUC', max_length=4000, blank=True, null=True, verbose_name='Sonuç')  # Field name made lowercase.
 
-    def __str__(self) -> str:
+    def __str__(self):
         return 'Dosya No: '+ self.dosyano + ' - Geliş No: ' + str(self.gelisno)
 
     class Meta:

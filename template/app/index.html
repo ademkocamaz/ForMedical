@@ -2,5 +2,12 @@
 {% load static %}
 
 {% block content %}
-it works....
-{% endblock content %}
+  <p>{{ service_definition }}</p>
+  {% for bed in beds %}
+  <!--<p>{{ bed.service_definition }}</p>-->
+    <p>{{ bed }}</p>
+    {% if bed.durum == 'DOLU' %}
+      <P>{{ bed.service.visit.patient }}</P>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

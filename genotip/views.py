@@ -4,19 +4,22 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 from genotip.forms import LoginForm
 
+
 def login(request):
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
+        service = request.POST["service"]
 
         user = auth.authenticate(username=username, password=password)
+
         if user is not None:
             auth.login(request, user)
-
+            request.session["service"] = service
             return redirect("index")
-    
+
     login_form = LoginForm()
-    
+
     context = {"login_form": login_form}
 
     return render(request, "genotip/login.html", context)

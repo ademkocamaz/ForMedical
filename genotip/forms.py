@@ -6,4 +6,4 @@ from genotip._model.service import ServiceDefinition
 
 
 class LoginForm(AuthenticationForm):
-    servis = forms.ModelChoiceField(ServiceDefinition.objects.all())
+    service = forms.ModelChoiceField(ServiceDefinition.objects.all(), label="SERVİS")

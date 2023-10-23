@@ -46,7 +46,7 @@ class Service(models.Model):
     giristarih = models.DateTimeField(db_column='GIRISTARIH', verbose_name='Giriş Tarihi', blank=True, null=True)  # Field name made lowercase.
     cikistarih = models.DateTimeField(db_column='CIKISTARIH', verbose_name='Çıkış Tarihi', blank=True, null=True)  # Field name made lowercase.
 
-    def __str__(self) -> str:
+    def __str__(self):
         return 'Dosya No: ' + str(self.dosyano) +' Oda: ' + str(self.oda)+' Yatak: ' + str(self.yatak) # + ' Giriş: '+ str(self.giristarih.strftime('%d.%m.%Y') if self.giristarih.strftime('%d.%m.%Y') is None else 'Girilmemiş')
 
     class Meta:
