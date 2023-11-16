@@ -2,23 +2,31 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block content %}
-  <div class="row">
-    <div class="col-md-6 mx-auto">
-      <form action="{% url 'login' %}" method="POST">
-        {% csrf_token %}
-        <div class="card">
-          <div class="card-header bg-dark text-white">
-            <h4>Giriş</h4>
-          </div>
-          <div class="card-body">
-            {% crispy login_form %}
-          </div>
-          <div class="card-footer">
-            <button type="submit" class="btn btn-dark mt-4">Oturum Aç</button>
-          </div>
+{% block main %}
+{% include 'partials/_alert.html' %}
+  <div class="login-page">
+    <div class="login-box">
+      <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+          <a href="" class="h1">For<b>M</b>edical</a>
         </div>
-      </form>
+        <div class="card-body">
+          <p class="login-box-msg">Oturum açmak için bilgilerinizi giriniz.</p>
+          <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <div class="card">
+              <div class="card-body">
+                {% crispy login_form %}
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col text-right"><button type="submit" class="btn btn-dark">Oturum Aç</button></div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 {% endblock %}

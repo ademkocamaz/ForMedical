@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block header %}
+  {% include 'partials/_navbar.html' %}
+  {% include 'partials/_main-sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+  {% crispy form %}
+  {% for formset in inlines %}
+    {% crispy formset %}
+  {% endfor %}
+{% endblock %}

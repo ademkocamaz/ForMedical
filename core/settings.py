@@ -32,8 +32,11 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'baton',
     'crispy_forms',
-    'crispy_bootstrap5',
+    'crispy_bootstrap4',
+    'crispy_formset_modal',
     'django_object_actions',
+    'extra_views',
+    # 'tempus_dominus',
     # -------------------
     'django.contrib.admin',
     'django.contrib.auth',
@@ -162,8 +165,8 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # DJANGO_ADMIN_LOGS_ENABLED = False
 
@@ -187,3 +190,15 @@ BATON = {
     # 'CHANGELIST_FILTERS_ALWAYS_OPEN': False,
     # 'CHANGELIST_FILTERS_FORM': True,
 }
+
+# Messages
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
+
+# TEMPUS_DOMINUS_LOCALIZE=True
+# TEMPUS_DOMINUS_INCLUDE_ASSETS=False
+# TEMPUS_DOMINUS_DATE_FORMAT="YYYY-MM-DD"
+# TEMPUS_DOMINUS_DATETIME_FORMAT="YYYY-MM-DD HH:mm:ss"
+# TEMPUS_DOMINUS_TIME_FORMAT="HH:mm:ss"

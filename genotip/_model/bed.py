@@ -10,7 +10,7 @@ from genotip._model.service import ServiceDefinition, Service
 
 class Bed(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    servis_adi = models.CharField(db_column='SERVIS_ADI', max_length=50, verbose_name='Servis Bilgisi')  # Field name made lowercase.
+    servis_adi = models.CharField(db_column='SERVIS_ADI', max_length=50, verbose_name='Servis')  # Field name made lowercase.
     oda = models.CharField(db_column='ODA', max_length=15, verbose_name='Oda Bilgisi')  # Field name made lowercase.
     yatak = models.CharField(db_column='YATAK', max_length=5, verbose_name='Yatak No')  # Field name made lowercase.
     
@@ -25,6 +25,7 @@ class Bed(models.Model):
     durum = models.CharField(db_column='DURUM', max_length=10, blank=True, null=True, verbose_name='Durum')  # Field name made lowercase.
     
     service = models.ForeignKey(
+        verbose_name='Hasta ve Servis Bilgileri',
         to=Service, 
         on_delete=models.DO_NOTHING,
         to_field='id', 

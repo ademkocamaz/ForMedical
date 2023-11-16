@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block header %}
+  {% include 'partials/_navbar.html' %}
+  {% include 'partials/_main-sidebar.html' %}
+{% endblock %} 
+
+{% block content %}
+   <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h5>Oda: {{ bed.oda }}</h5>
+        </div>
+        <div class="card-header">
+          <h5>Yatak: {{ bed.yatak }}</h5>
+        </div>
+        <div class="card-header">
+          <h5>Dosya No: {{ bed.service.visit.patient.dosyano }}</h5>
+        </div>
+        <div class="card-header">
+          <h5>Doktor: {{ bed.service.doktor }}</h5>
+        </div>
+        <div class="card-header">
+          <h5>Poliklinik: {{ bed.service.visit.poliklinik }}</h5>
+        </div>
+        <div class="card-header">
+          <h5>Adı ve Soyadı: {{ bed.service.visit.patient.ad }} {{ bed.service.visit.patient.soyad }}</h5>
+        </div>
+        <div class="card-header">
+          <h5>Cinsiyeti: {{ bed.service.visit.patient.cinsiyet }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form action="." method="post">
+    {% crispy pain_form %}
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn btn-lg btn-warning">
+        <ion-icon name="save-outline" size="large"></ion-icon>
+        <br>
+        Kaydet
+      </button>
+    </div>
+  </form>
+{% endblock %}

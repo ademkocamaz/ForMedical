@@ -1,5 +1,6 @@
 from django.db import models
 from genotip._model.service import Service
+from genotip._model.bed import Bed
 from django.conf import settings
 
 class Pain(models.Model):
@@ -8,6 +9,13 @@ class Pain(models.Model):
     #     on_delete=models.DO_NOTHING,
     #     verbose_name='Dosya Numarası'
     # )
+    bed = models.ForeignKey(
+        Bed,
+        on_delete=models.DO_NOTHING,
+        verbose_name='Yatak ve Oda Bilgileri',
+        db_constraint=False,
+        # editable=False
+    )
     service = models.ForeignKey(
         Service,
         on_delete=models.DO_NOTHING,
@@ -178,15 +186,15 @@ class PainScale(models.Model):
         Pain,
         on_delete=models.CASCADE,
         verbose_name='Ağrı Formu',
-        related_name='painScales',
+        related_name="PainScales"
     )
 
     description = models.TextField(
-        verbose_name='Ağrı Skalası (Numerik Davransal Yüz)'
+        verbose_name='Ağrı Skalası (Numerik Davransal Yüz)',
     )
 
     date = models.DateTimeField(
-        verbose_name='Tarih/Saat'
+        verbose_name='Tarih/Saat',
     )
 
     edited = models.DateTimeField(
@@ -212,7 +220,7 @@ class PainPlace(models.Model):
     pain = models.ForeignKey(
         Pain,
         on_delete=models.CASCADE,
-        verbose_name='Ağrı Formu'
+        verbose_name='Ağrı Formu',
     )
 
     description = models.TextField(
@@ -411,3 +419,35 @@ class PainTargetedLevel(models.Model):
         verbose_name = 'Hedeflenen Ağrı Düzeyi (Hasta İle İşbirliği Halinde Hemşire Tarafından)'
         verbose_name_plural = 'Hedeflenen Ağrı Düzeyi Kayıtları'
 
+
+class PainIntervention(models.Model):
+    pain = models.ForeignKey(
+        Pain,
+        on_delete=models.CASCADE,
+        verbose_name='Ağrı Formu'
+    )
+    pain_severity=models.TextField(verbose_name='Ağrının Şiddeti', blank=True, null=True)
+    medicine_detail=models.TextField(verbose_name='Yapılan Uygulama - İlaç Adı, Dozu ve Uygulama Yolu', blank=True, null=True)
+    out_of_medicine=models.TextField(verbose_name='Yapılan Uygulama - İlaç Dışı Uygulama', blank=True, null=True)
+    note=models.TextField(verbose_name='Not', blank=True, null=True)
+
+    date = models.DateTimeField(
+        verbose_name='Tarih/Saat'
+    )
+
+    edited = models.DateTimeField(
+        auto_now=True,
+        verbose_name='Düzenleme Tarihi'
+    )
+
+    created = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Oluşturulma Tarihi'
+    )
+
+    def __str__(self):
+        return self.medicine_detail
+
+    class Meta:
+        verbose_name = 'Yapılan Uygulama'
+        verbose_name_plural = 'Yapılan Uygulama Kayıtları'

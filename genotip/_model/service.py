@@ -11,7 +11,7 @@ from genotip._model.visit import Visit
 
 class ServiceDefinition(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    ad = models.CharField(db_column='AD', max_length=50, verbose_name='Servis Bilgisi')  # Field name made lowercase.
+    ad = models.CharField(db_column='AD', max_length=50, verbose_name='Servis Adı')  # Field name made lowercase.
     aktif = models.BooleanField(db_column='AKTIF', verbose_name='Aktif ?')  # Field name made lowercase.
 
     def __str__(self):
@@ -47,7 +47,7 @@ class Service(models.Model):
     cikistarih = models.DateTimeField(db_column='CIKISTARIH', verbose_name='Çıkış Tarihi', blank=True, null=True)  # Field name made lowercase.
 
     def __str__(self):
-        return 'Dosya No: ' + str(self.dosyano) +' Oda: ' + str(self.oda)+' Yatak: ' + str(self.yatak) # + ' Giriş: '+ str(self.giristarih.strftime('%d.%m.%Y') if self.giristarih.strftime('%d.%m.%Y') is None else 'Girilmemiş')
+        return 'Servis: ' + str(self.servis) + ' - Dosya No: ' + str(self.dosyano) + ' - Geliş No: ' + str(self.gelisno)# +' Oda: ' + str(self.oda)+' Yatak: ' + str(self.yatak) # + ' Giriş: '+ str(self.giristarih.strftime('%d.%m.%Y') if self.giristarih.strftime('%d.%m.%Y') is None else 'Girilmemiş')
 
     class Meta:
         managed = False  # Created from a view. Don't remove.

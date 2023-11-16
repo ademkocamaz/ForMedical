@@ -70,7 +70,10 @@ class User(AbstractBaseUser):
         Return a boolean of whether the raw_password was correct. Handles
         hashing formats behind the scenes.
         """
-        return True
+        if self.password==raw_password:
+            return True
+        else:
+            return False
 
     def has_usable_password(self):
         """

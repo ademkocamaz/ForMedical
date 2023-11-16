@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load verbose_name %}
+
+{% block header %}
+  {% include 'partials/_navbar.html' %}
+  {% include 'partials/_main-sidebar.html' %}
+{% endblock %}
+
+{% block content_header %}
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">{{ service_definition }}</h1>
+      </div>
+      <!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item active">{{ request.user }}</li>
+        </ol>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col">
+      <div class="card card-danger">
+        <div class="card-header" data-card-widget="collapse">
+          <h3 class="card-title">Hasta Bilgileri</h3>
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-2 col-md-6">
+              <div class="card card-success">
+                <div class="card-header">
+                  <h5>Doktor</h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{ bed.service.doktor }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+              <div class="card card-success">
+                <div class="card-header">
+                  <h5>Poliklinik</h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{ bed.service.visit.poliklinik }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+              <div class="card card-success">
+                <div class="card-header">
+                  <h5>Oda</h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{ bed.oda }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+              <div class="card card-success">
+                <div class="card-header">
+                  <h5>Yatak</h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{ bed.yatak }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-2 col-md-6">
+              <div class="card card-info">
+                <div class="card-header">
+                  <h5>Dosya Numarası</h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{ bed.service.dosyano }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+              <div class="card card-info">
+                <div class="card-header">
+                  <h5>Vatandaşlık Numarası</h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{ bed.service.visit.patient.vatandaslikno }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+              <div class="card card-info">
+                <div class="card-header">
+                  <h5>Adı ve Soyadı</h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{ bed.service.visit.patient.ad }} {{ bed.service.visit.patient.soyad }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+              <div class="card card-info">
+                <div class="card-header">
+                  <h5>Cinsiyeti</h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{ bed.service.visit.patient.cinsiyet }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+              <div class="card card-info">
+                <div class="card-header">
+                  <h5>Giriş Tarihi</h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{ bed.service.giristarih }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+              <div class="card card-info">
+                <div class="card-header">
+                  <h5>Çıkış Tarihi</h5>
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{ bed.service.cikistarih|default_if_none:'-' }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="card card-secondary">
+        <div class="card-header" data-card-widget="collapse">
+          <h3 class="card-title">Formlar</h3>
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+          </div>
+        </div>
+
+        <div class="card-body">
+          {% if pain_forms %}
+          <div class="row">
+            <div class="col">
+              <div class="card card-warning collapsed-card">
+                <div class="card-header" data-card-widget="collapse">
+                  <h4 class="card-title">{% formset_verbose_name_plural pain_forms %}</h4>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row bg-warning">
+                    <div class="col">Yatak ve Oda Bilgileri</div>
+                    <div class="col">Servis Bilgileri</div>
+                    <div class="col">Düzenleme Tarihi</div>
+                    <div class="col">Oluşturma Tarihi</div>
+                    <div class="col">Seçenekler</div>
+                  </div>
+                  {% for pain_form in pain_forms %}
+
+                  <div class="row border border-warning">
+                    <div class="col"><a href="{% url 'pain_update' bed.id pain_form.id %}">{{ pain_form.bed }}</a></div>
+                    <div class="col">{{ pain_form.service }}</div>
+                    <div class="col">{{ pain_form.edited }}</div>
+                    <div class="col">{{ pain_form.created }}</div>
+                    <div class="col"><a href="{% url 'pain_print' bed.id pain_form.id %}" target="_blank"><ion-icon size="large" name="print-outline"></ion-icon></a></div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

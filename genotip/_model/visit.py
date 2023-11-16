@@ -34,7 +34,7 @@ class Visit(models.Model):
     # sonuc = models.CharField(db_column='SONUC', max_length=4000, blank=True, null=True, verbose_name='Sonuç')  # Field name made lowercase.
 
     def __str__(self):
-        return 'Dosya No: '+ self.dosyano + ' - Geliş No: ' + str(self.gelisno)
+        return 'Dosya No: '+ self.dosyano + ' - Geliş No: ' + str(self.gelisno) + ' - Doktor: ' + self.doktor + ' - Poliklinik :' + self.poliklinik
 
     class Meta:
         managed = False  # Created from a view. Don't remove.

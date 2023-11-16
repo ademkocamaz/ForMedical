@@ -121,6 +121,22 @@ class PainTargetedLevelInline(admin.StackedInline):
     # ]
 
 
+class PainInterventionInline(admin.StackedInline):
+    model = PainIntervention
+    extra = 0
+    max_num = 3
+    classes = ("collapse-entry",)
+    # fieldsets = [
+    #     (
+    #         "Bilgiler",
+    #         {
+    #             "classes": ["collapse"],
+    #             "fields": [field.name for field in model._meta.concrete_fields if field.name not in ('id', 'edited', 'created')],
+    #         },
+    #     ),
+    # ]
+
+
 class PainInline(admin.StackedInline):
     model = Pain
     extra = 0
@@ -153,6 +169,7 @@ class PainInline(admin.StackedInline):
         PainNatureInline,
         PainFactorAffectingInline,
         PainTargetedLevelInline,
+        PainInterventionInline,
     ]
 
 
@@ -164,30 +181,30 @@ class PainAdmin(DjangoObjectActions, admin.ModelAdmin):
     )
     def print(self, request, obj):
         from django.shortcuts import render
-        from django.db.models import Prefetch
         
-        painScales=PainScale.objects.filter(pain=obj)
-        painPlaces=PainPlace.objects.filter(pain=obj)
-        painSeverities=PainSeverity.objects.filter(pain=obj)
-        painFrequencies=PainFrequency.objects.filter(pain=obj)
-        painNatures=PainNature.objects.filter(pain=obj)
-        painFactorAffectings=PainFactorAffecting.objects.filter(pain=obj)
-        painTargetedLevels=PainTargetedLevel.objects.filter(pain=obj)
+        pain = obj
+        pain_scales = PainScale.objects.filter(pain=pain)
+        pain_places = PainPlace.objects.filter(pain=pain)
+        pain_severities = PainSeverity.objects.filter(pain=pain)
+        pain_frequencies = PainFrequency.objects.filter(pain=pain)
+        pain_natures = PainNature.objects.filter(pain=pain)
+        pain_factor_affectings = PainFactorAffecting.objects.filter(pain=pain)
+        pain_targeted_levels = PainTargetedLevel.objects.filter(pain=pain)
+        pain_interventions = PainIntervention.objects.filter(pain=pain)
 
         context = {
-            "pain": obj,
-            "painScales":painScales,
-            "painPlaces":painPlaces,
-            "painSeverities":painSeverities,
-            "painFrequencies":painFrequencies,
-            "painNatures":painNatures,
-            "painFactorAffectings":painFactorAffectings,
-            "painTargetedLevels":painTargetedLevels,
+            "pain": pain,
+            "pain_scales": pain_scales,
+            "pain_places": pain_places,
+            "pain_severities": pain_severities,
+            "pain_frequencies": pain_frequencies,
+            "pain_natures": pain_natures,
+            "pain_factor_affectings": pain_factor_affectings,
+            "pain_targeted_levels": pain_targeted_levels,
+            "pain_interventions": pain_interventions,
         }
 
-        return render(
-            request=request, template_name="form/admin/pain_print.html", context=context
-        )
+        return render(request=request, template_name='form/pain/pain_print.html', context=context)
         # from django.http import HttpResponseRedirect
         # return HttpResponseRedirect(f'https://google.com')
 
@@ -210,15 +227,17 @@ class PainAdmin(DjangoObjectActions, admin.ModelAdmin):
     fields = [
         field.name
         for field in Pain._meta.fields
-        if field.name not in ("id", "edited", "created", "user")
+        if field.name not in ("id", "edited", "created")
     ]
     list_display = [
         field.name
         for field in Pain._meta.fields
-        if field.name in ("service", "edited", "created", "user")
+        if field.name in ("bed", "service", "edited", "created", "user")
     ]
-    list_display_links = ("service",)
-    search_fields = ("service",)
+    list_display_links = ("service", "bed")
+    search_fields = ("service", "bed")
+
+    readonly_fields = ("bed", "service", "user")
 
     save_on_top = True
 
@@ -240,4 +259,5 @@ class PainAdmin(DjangoObjectActions, admin.ModelAdmin):
         PainNatureInline,
         PainFactorAffectingInline,
         PainTargetedLevelInline,
+        PainInterventionInline,
     ]

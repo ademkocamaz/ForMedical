@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load verbose_name %}
+{% load crispy_forms_tags %}
+
+{% block header %}
+  {% include 'partials/_navbar.html' %}
+  {% include 'partials/_main-sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <h5>Oda: {{ bed.oda }}</h5>
+        </div>
+        <div class="card-header">
+          <h5>Yatak: {{ bed.yatak }}</h5>
+        </div>
+        <div class="card-header">
+          <h5>Dosya No: {{ bed.service.visit.patient.dosyano }}</h5>
+        </div>
+        <div class="card-header">
+          <h5>Doktor: {{ bed.service.doktor }}</h5>
+        </div>
+        <div class="card-header">
+          <h5>Poliklinik: {{ bed.service.visit.poliklinik }}</h5>
+        </div>
+        <div class="card-header">
+          <h5>Adı ve Soyadı: {{ bed.service.visit.patient.ad }} {{ bed.service.visit.patient.soyad }}</h5>
+        </div>
+        <div class="card-header">
+          <h5>Cinsiyeti: {{ bed.service.visit.patient.cinsiyet }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <form action="." method="post">
+        {% crispy pain_form %}
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-lg btn-warning">
+            <ion-icon name="save-outline" size="large"></ion-icon>
+            <br>
+            Kaydet
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% if pain %}
+    <!-- PainScale -->
+    <div class="row">
+      <div class="col">
+        <div class="card collapsed-card">
+          <div class="card-header" data-card-widget="collapse">
+            <h5 class="card-title">{% formset_verbose_name_plural pain_scale_formset %}</h5>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+          <div class="card-body">
+            {% crispy pain_scale_formset pain_scale_formset_helper %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- PainPlace -->
+    <div class="row">
+      <div class="col">
+        <div class="card collapsed-card">
+          <div class="card-header" data-card-widget="collapse">
+            <h5 class="card-title">{% formset_verbose_name_plural pain_place_formset %}</h5>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+          <div class="card-body">
+            {% crispy pain_place_formset pain_place_formset_helper %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- PainSeverity -->
+    <div class="row">
+      <div class="col">
+        <div class="card collapsed-card">
+          <div class="card-header" data-card-widget="collapse">
+            <h5 class="card-title">{% formset_verbose_name_plural pain_severity_formset %}</h5>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+          <div class="card-body">
+            {% crispy pain_severity_formset pain_severity_formset_helper %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- PainFrequency -->
+    <div class="row">
+      <div class="col">
+        <div class="card collapsed-card">
+          <div class="card-header" data-card-widget="collapse">
+            <h5 class="card-title">{% formset_verbose_name_plural pain_frequency_formset %}</h5>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+          <div class="card-body">
+            {% crispy pain_frequency_formset pain_frequency_formset_helper %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- PainNature -->
+    <div class="row">
+      <div class="col">
+        <div class="card collapsed-card">
+          <div class="card-header" data-card-widget="collapse">
+            <h5 class="card-title">{% formset_verbose_name_plural pain_nature_formset %}</h5>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+          <div class="card-body">
+            {% crispy pain_nature_formset pain_nature_formset_helper %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- PainFactorEffecting -->
+    <div class="row">
+      <div class="col">
+        <div class="card collapsed-card">
+          <div class="card-header" data-card-widget="collapse">
+            <h5 class="card-title">{% formset_verbose_name_plural pain_factor_affecting_formset %}</h5>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+          <div class="card-body">
+            {% crispy pain_factor_affecting_formset pain_factor_affecting_formset_helper %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- PainTargetedLevel -->
+    <div class="row">
+      <div class="col">
+        <div class="card collapsed-card">
+          <div class="card-header" data-card-widget="collapse">
+            <h5 class="card-title">{% formset_verbose_name_plural pain_targeted_level_formset %}</h5>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+          <div class="card-body">
+            {% crispy pain_targeted_level_formset pain_targeted_level_formset_helper %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- PainIntervention -->
+    <div class="row">
+      <div class="col">
+        <div class="card collapsed-card">
+          <div class="card-header" data-card-widget="collapse">
+            <h5 class="card-title">{% formset_verbose_name_plural pain_intervention_formset %}</h5>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+          <div class="card-body">
+            {% crispy pain_intervention_formset pain_intervention_formset_helper %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,13 +1,145 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block header %}
+  {% include 'partials/_navbar.html' %}
+  {% include 'partials/_main-sidebar.html' %}
+{% endblock %}
+
+{% block content_header %}
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">{{ service_definition }}</h1>
+      </div>
+      <!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item active">{{ request.user }}</li>
+        </ol>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+{% endblock %}
+
 {% block content %}
-  <p>{{ service_definition }}</p>
+  <div class="row">
   {% for bed in beds %}
-  <!--<p>{{ bed.service_definition }}</p>-->
-    <p>{{ bed }}</p>
-    {% if bed.durum == 'DOLU' %}
-      <P>{{ bed.service.visit.patient }}</P>
+    {% if forloop.counter0|divisibleby:'4' %}
+  </div>
+  <div class="row">
+        <div class="col-lg-3 col-6">
+          
+          {% if bed.durum == 'DOLU' %}
+          <a href="{% url 'bed_detail' bed.id %}">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h2>{{ bed.oda }}</h2>
+                <h3>Yatak: {{ bed.yatak }}</h3>
+                <h4>{{ bed.durum }}</h4>
+              </div>
+              <div class="icon">
+                <i class="ion"><ion-icon name="bed"></ion-icon></ion-icon></i>
+              </div>
+              {% if bed.service.visit.patient.cinsiyet == 'KADIN' %}
+              <div class="icon">
+                <i class="ion"><ion-icon name="woman"></ion-icon></i>
+              </div>
+              {% else %}
+              <div class="icon">
+                <i class="ion"><ion-icon name="man"></ion-icon></i>
+              </div>
+              {% endif %}
+              <div class="small-box-footer">
+                
+                <div class="card-header p-0"><h5>Dosya No: {{ bed.service.visit.patient.dosyano }}</h5></div>
+                <div class="card-header p-0"><h5>Doktor: {{ bed.service.doktor }}</h5></div>
+                <div class="card-header p-0"><h5>Poliklinik: {{ bed.service.visit.poliklinik }}</h5></div>
+                <div class="card-body">
+                  <h6>{{ bed.service.visit.patient.ad }} {{ bed.service.visit.patient.soyad }}</h6>
+                  <h6>{{ bed.service.visit.patient.cinsiyet }}</h6>
+                </div>
+                
+                
+              </div>
+              
+            </div>
+            <!-- small box -->
+          </a>
+          {% else %}
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h2>{{ bed.oda }}</h2>
+                <h3>Yatak: {{ bed.yatak }}</h3>
+                <h4>{{ bed.durum }}</h4>
+              </div>
+              <div class="icon">
+                <i class="ion"><ion-icon name="bed-outline"></ion-icon></i>
+              </div>
+            </div>
+            <!-- small box -->
+          {% endif %}
+          
+        </div>
+      
+      <!-- ./col -->
+    {% else %}
+      <div class="col-lg-3 col-6">
+        {% if bed.durum == 'DOLU' %}
+        <a href="{% url 'bed_detail' bed.id %}">
+          <!-- small box -->
+          <div class="small-box bg-danger">
+            <div class="inner">
+              <h2>{{ bed.oda }}</h2>
+              <h3>Yatak: {{ bed.yatak }}</h3>
+              <h4>{{ bed.durum }}</h4>
+            </div>
+            <div class="icon">
+              <i class="ion"><ion-icon name="bed"></ion-icon></i>
+            </div>
+            {% if bed.service.visit.patient.cinsiyet == 'KADIN' %}
+              <div class="icon">
+                <i class="ion"><ion-icon name="woman"></ion-icon></i>
+              </div>
+              {% else %}
+              <div class="icon">
+                <i class="ion"><ion-icon name="man"></ion-icon></i>
+              </div>
+              {% endif %}
+            <div class="small-box-footer">
+              
+                <div class="card-header p-0"><h5>Dosya No: {{ bed.service.visit.patient.dosyano }}</h5></div>
+                <div class="card-header p-0"><h5>Doktor: {{ bed.service.doktor }}</h5></div>
+                <div class="card-header p-0"><h5>Poliklinik: {{ bed.service.visit.poliklinik }}</h5></div>
+                <div class="card-body">
+                  <h6>{{ bed.service.visit.patient.ad }} {{ bed.service.visit.patient.soyad }}</h6>
+                  <h6>{{ bed.service.visit.patient.cinsiyet }}</h6>
+                </div>
+              
+            </div>
+          </div>
+          <!-- small box -->
+        </a>
+        {% else %}
+          <!-- small box -->
+          <div class="small-box bg-info">
+            <div class="inner">
+              <h2>{{ bed.oda }}</h2>
+              <h3>Yatak: {{ bed.yatak }}</h3>
+              <h4>{{ bed.durum }}</h4>
+            </div>
+            <div class="icon">
+              <i class="ion"><ion-icon name="bed-outline"></ion-icon></i>
+            </div>
+          </div>
+          <!-- small box -->
+        {% endif %}
+      </div>
     {% endif %}
   {% endfor %}
 {% endblock %}

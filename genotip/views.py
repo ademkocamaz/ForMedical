@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.contrib import auth
 from genotip.forms import LoginForm
-
+from django.contrib import messages
 
 def login(request):
     if request.method == "POST":
@@ -17,6 +17,8 @@ def login(request):
             auth.login(request, user)
             request.session["service"] = service
             return redirect("index")
+        else:
+            messages.add_message(request, messages.ERROR, 'Kullanıcı Adı veya Parola hatalı. Giriş Bilgilerini kontrol ediniz.')
 
     login_form = LoginForm()
 

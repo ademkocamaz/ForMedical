@@ -1,0 +1,155 @@
+{% load crispy_forms_field %}
+
+{% if field.is_hidden %}
+    {{ field }}
+{% else %}
+    {% if field|is_checkbox %}
+        <div class="form-group{% if 'form-horizontal' in form_class %} row{% endif %}">
+        {% if label_class %}
+            <div class="{% for offset in bootstrap_checkbox_offsets %}{{ offset }} {% endfor %}{{ field_class }}">
+        {% endif %}
+    {% endif %}
+    <{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="{% if not field|is_checkbox %}form-group{% if 'form-horizontal' in form_class %} row{% endif %}{% else %}{%if use_custom_control%}{% if tag != 'td' %}custom-control {%endif%} custom-checkbox{% else %}form-check{% endif %}{% endif %}{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}">
+        {% if field.label and not field|is_checkbox and form_show_labels %}
+        {# not field|is_radioselect in row below can be removed once Django 3.2 is no longer supported #}    
+        <label {% if field.id_for_label and not field|is_radioselect %}for="{{ field.id_for_label }}" {% endif %}class="{% if 'form-horizontal' in form_class %}col-form-label {% endif %}{{ label_class }}{% if field.field.required %} requiredField{% endif %}">
+                {{ field.label }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
+            </label>
+        {% endif %}
+
+        {% if field|is_checkboxselectmultiple %}
+            {% include 'bootstrap4/layout/checkboxselectmultiple.html' %}
+        {% endif %}
+
+        {% if field|is_radioselect %}
+            {% include 'bootstrap4/layout/radioselect.html' %}
+        {% endif %}
+
+        {% if not field|is_checkboxselectmultiple and not field|is_radioselect %}
+            {% if field|is_checkbox and form_show_labels %}
+                {%if use_custom_control%}
+                    {% if field.errors %}
+                        {% crispy_field field 'class' 'custom-control-input is-invalid' %}
+                    {% else %}
+                        {% crispy_field field 'class' 'custom-control-input' %}
+                    {% endif %}
+                {% else %}
+                    {% if field.errors %}
+                        {% crispy_field field 'class' 'form-check-input is-invalid' %}
+                    {% else %}
+                        {% crispy_field field 'class' 'form-check-input' %}
+                    {% endif %}
+                {% endif %}
+                <label for="{{ field.id_for_label }}" class="{%if use_custom_control%}custom-control-label{% else %}form-check-label{% endif %}{% if field.field.required %} requiredField{% endif %}">
+                    {{ field.label }}{% if field.field.required %}<span class="asteriskField">*</span>{% endif %}
+                </label>
+                {% include 'bootstrap4/layout/help_text_and_errors.html' %}
+            {% elif field|is_file and use_custom_control  %}
+                {% include 'bootstrap4/layout/field_file.html' %}
+            {% else %}
+                <div{% if field_class %} class="{{ field_class }}"{% endif %}>
+                    {% if field|is_select and use_custom_control %}
+                        {% if field.errors %}
+                            {% crispy_field field 'class' 'custom-select is-invalid' %}
+                        {% else %}
+                            {% crispy_field field 'class' 'custom-select' %}
+                        {% endif %}
+                    {% elif field|is_file %}
+                        {% if field.errors %}                 
+                            {% crispy_field field 'class' 'form-control-file is-invalid' %}
+                        {% else %}
+                            {% crispy_field field 'class' 'form-control-file' %}
+                        {% endif %}
+                    {% else %}
+                        {% if 'date' in field.auto_id %}
+                            {% with div_id='#div-'|add:field.auto_id %}
+                                <div class="input-group date" id="{{ 'div-'|add:field.auto_id }}" data-target-input="nearest">
+                                    {% if field.errors %}
+                                        {% crispy_field field 'class' 'form-control datetimepicker-input is-invalid'  'data-toggle' 'datetimepicker' 'data-target' div_id %}
+                                    {% else %}
+                                        {% crispy_field field 'class' 'form-control datetimepicker-input' 'data-toggle' 'datetimepicker' 'data-target' div_id %}
+                                    {% endif %}
+                                    <div class="input-group-append" data-target="{{ div_id }}" data-toggle="datetimepicker">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        $(function() {
+                                            $("{{ div_id }}").datetimepicker({
+                                                useCurrent: true,
+                                                locale: 'tr',
+                                                format: 'DD/MM/YYYY HH:mm:ss',
+                                                icons:{
+                                                    time: 'far fa-clock',
+                                                    date: 'fa fa-calendar',
+                                                    clear: 'fa fa-trash',
+                                                    close: 'fa fa-times',
+                                                    today: 'fa fa-calendar-plus',
+                                                },
+                                                buttons: {
+                                                    showToday: true,
+                                                    showClear: true,
+                                                    showClose: true,
+                                                },
+                                                tooltips:{
+                                                    today: 'Şimdi',
+                                                    clear: 'Temizle',
+                                                    close: 'Kapat',
+
+                                                    selectDate: "Tarih Seçimi",
+                                                    selectTime: "Zaman Seçimi",
+
+                                                    selectMonth: 'Ay Seçimi',
+                                                    prevMonth: 'Sonraki Ay',
+                                                    nextMonth: 'Önceki Ay',
+
+                                                    selectYear: 'Yıl Seçimi',
+                                                    nextYear: 'Sonraki Yıl',
+                                                    prevYear: 'Önceki Yıl',
+
+                                                    selectDecade: 'Yıl Aralığı Seçimi',
+                                                    nextDecade: 'Sonraki Yıl Aralığı',
+                                                    prevDecade: 'Önceki Yıl Aralığı',
+                                                    
+                                                    nextCentury: 'Sonraki Yüzyıl',
+                                                    prevCentury: 'Önceki Yüzyıl',
+                                                    
+                                                    pickHour: 'Saat Seçimi',
+                                                    incrementHour: 'Saati Artır (+)',
+                                                    decrementHour: 'Saati Azalt (-)',
+
+                                                    pickMinute: 'Dakika Seçimi',
+                                                    incrementMinute: 'Dakikayı Artır (+)',
+                                                    decrementMinute: 'Dakikayı Azalt (-)',
+
+                                                    pickSecond: 'Saniye Seçimi',
+                                                    incrementSecond: 'Saniyeyi Artır (+)',
+                                                    decrementSecond:'Saniyeyi Azalt (-)'
+                                                },
+                                            });
+                                        });
+                                    </script>
+                                                
+                                </div>
+                            {% endwith %}
+                        {% else %}
+                            {% if field.errors %}                      
+                                {% crispy_field field 'class' 'form-control is-invalid' %}
+                            {% else %}
+                                {% crispy_field field 'class' 'form-control' %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                    {% include 'bootstrap4/layout/help_text_and_errors.html' %}
+                </div>
+            {% endif %}
+        {% endif %}
+    </{% if tag %}{{ tag }}{% else %}div{% endif %}>
+    {% if field|is_checkbox %}
+        {% if label_class %}
+            </div>
+        {% endif %}
+        </div>
+    {% endif %}
+{% endif %}
