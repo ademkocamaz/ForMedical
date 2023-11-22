@@ -7,22 +7,32 @@ from crispy_forms.layout import *
 from crispy_forms.helper import FormHelper
 from crispy_forms.bootstrap import InlineRadios
 
+from crispy_formset_modal.helper import ModalEditFormHelper
+from crispy_formset_modal.layout import ModalEditLayout, ModalEditFormsetLayout
+
 # region PainScaleForm
 
-
 class PainScaleForm(forms.ModelForm):
-    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = ModalEditFormHelper()
+        self.helper.layout = ModalEditLayout(
+            "pain",
+            "description",
+            "date",
+        )
     # def __init__(self, *args, **kwargs):
     #     super(PainScaleForm, self).__init__(*args, **kwargs)
     #     if self.instance.pk:
     #         self.fields['description'].widget.attrs['readonly'] = True
     #         self.fields['date'].widget.attrs['readonly'] = True
+
     class Meta:
         model = PainScale
         fields = "__all__"
         # widgets = {
         #     # "date": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'})
-        #     "date": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S')),
+        #     # "date": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S')),
         # }
 
 
@@ -52,12 +62,26 @@ PainScaleFormSet = inlineformset_factory(
     can_delete=True,
 )
 
+
+class PainScaleInline(InlineFormSetFactory):
+    model = PainScale
+    form_class = PainScaleForm
+    fields = "__all__"
+    factory_kwargs = {"extra": 0, "max_num":3}
 # endregion
 
 # region PainPlaceForm
 
 
 class PainPlaceForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = ModalEditFormHelper()
+        self.helper.layout = ModalEditLayout(
+            "pain",
+            "description",
+            "date",
+        )
     class Meta:
         model = PainPlace
         fields = "__all__"
@@ -88,6 +112,13 @@ PainPlaceFormSet = inlineformset_factory(
     max_num=3,
     can_delete=True,
 )
+
+class PainPlaceInline(InlineFormSetFactory):
+    model = PainPlace
+    form_class = PainPlaceForm
+    fields = "__all__"
+    factory_kwargs = {"extra": 0, "max_num":3}
+
 # endregion
 
 # region PainSeverityForm
@@ -337,13 +368,13 @@ class PainForm(forms.ModelForm):
             Field("user"),
 
             HTML(
-                """<div class="d-flex justify-content-center image"><img src="/static/img/numerik_agri_skalasi.png"></div>"""
+                """<img src="/static/img/numerik_agri_skalasi.png" class="img-fluid" >"""
             ),
 
             InlineRadios("numericalPainScale"),
 
             HTML(
-                """<div class="d-flex justify-content-center image"><img src="/static/img/yuz_skalasi.png"></div>"""
+                """<img src="/static/img/yuz_skalasi.png" class="img-fluid" >"""
             ),
 
             InlineRadios("wongBakerFacesPainScale"),
@@ -363,8 +394,37 @@ class PainForm(forms.ModelForm):
 
             InlineRadios("behavioralComfortedPainScale"),
 
-        )
+            Div(
+                Submit("submit", "Kaydet", css_class="btn btn-lg btn-warning"),
+                css_class="d-flex justify-content-center mb-3",
+            ),
 
+            Fieldset(
+                PainScale._meta.verbose_name_plural,
+                ModalEditFormsetLayout(
+                    "PainScaleInline",
+                    list_display=["description", "date"],
+                ),
+            ),
+            Fieldset(
+                PainPlace._meta.verbose_name_plural,
+                ModalEditFormsetLayout(
+                    "PainPlaceInline",
+                    list_display=["description", "date"],
+                ),
+            ),
+
+            
+            Div(
+                Submit("submit", "Kaydet", css_class="btn btn-lg btn-warning"),
+                css_class="d-flex justify-content-center mb-3",
+            ),
+        )
+        
+        # if self.instance.pk:
+        #     for field in self.fields:
+        #         field.widget.attrs["readonly"]=True
+        
     class Meta:
         model = Pain
         fields = "__all__"

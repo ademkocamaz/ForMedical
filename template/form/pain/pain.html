@@ -36,14 +36,9 @@
     </div>
   </div>
 
-  <form action="." method="post">
-    {% crispy pain_form %}
-    <div class="d-flex justify-content-center">
-      <button type="submit" class="btn btn-lg btn-warning">
-        <ion-icon name="save-outline" size="large"></ion-icon>
-        <br>
-        Kaydet
-      </button>
+  <div class="row">
+    <div class="col">
+      {% crispy pain_form %}
     </div>
-  </form>
+  </div>
 {% endblock %}

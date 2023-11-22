@@ -1,4 +1,6 @@
-from extra_views import CreateWithInlinesView, InlineFormSetFactory
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
+from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 from django.views.generic.edit import CreateView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -78,6 +80,15 @@ def pain_update(request, bed_id, pain_id):
     pain = get_object_or_404(Pain, pk=pain_id)
 
     if request.method == 'POST':
+
+        pain_form_updated = PainForm(request.POST, instance=pain)
+        if pain_form_updated.is_valid():
+            pain_form_updated.save()
+        # else:
+        #     messages.add_message(request, messages.ERROR,
+        #                          pain_form_updated._meta.model._meta.verbose_name)
+        #     for error in pain_form_updated.errors:
+        #         messages.add_message(request, messages.ERROR, error)
 
         pain_scale_formset = PainScaleFormSet(request.POST, instance=pain)
 
@@ -290,30 +301,44 @@ class PainCreateView(CreateView):
         return super(PainCreateView, self).form_valid(form)
 
 
-class PainScaleInline(InlineFormSetFactory):
-    model = PainScale
-    # form_class = PainScaleForm
-    fields="__all__"
-    factory_kwargs = {
-        'extra': 1,
-        'max_num': 3,
-        'can_delete': True
-    }
+# class PainScaleInline(InlineFormSetFactory):
+#     model = PainScale
+#     # form_class = PainScaleForm
+#     fields="__all__"
+#     factory_kwargs = {
+#         'extra': 1,
+#         'max_num': 3,
+#         'can_delete': True
+#     }
 
 
 class PainCreateTestView(CreateWithInlinesView):
     model = Pain
     form_class = PainForm
-    inlines = [PainScaleInline,]
+    inlines = [PainScaleInline, PainPlaceInline]
+    template_name = "form/pain/pain_test.html"
+    
+    def get_context_data(self, **kwargs):
+        print(self.kwargs)
+        data = super().get_context_data(**kwargs)
+        data['bed'] = get_object_or_404(Bed, pk=self.kwargs["bed_id"])
+        return data
+    
+    def get_success_url(self):
+        return self.object.get_absolute_url()
+
+class PainUpdateTestView(UpdateWithInlinesView):
+    model = Pain
+    form_class = PainForm
+    inlines = [PainScaleInline, PainPlaceInline]
     template_name = "form/pain/pain_test.html"
 
     def get_context_data(self, **kwargs):
         print(self.kwargs)
         data = super().get_context_data(**kwargs)
-        if self.request.POST:
-            # data['pain_scale'] = PainScaleFormSet(self.request.POST)
-            data['bed'] = get_object_or_404(Bed, pk=self.kwargs["bed_id"])
-        else:
-            # data['pain_scale'] = PainScaleFormSet()
-            data['bed'] = get_object_or_404(Bed, pk=self.kwargs["bed_id"])
+        data['bed'] = get_object_or_404(Bed, pk=self.kwargs["bed_id"])
+        data['pain'] = get_object_or_404(Pain, pk=self.kwargs["pain_id"])
         return data
+
+    def get_success_url(self):
+        return self.object.get_absolute_url()

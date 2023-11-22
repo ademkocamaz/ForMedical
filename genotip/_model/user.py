@@ -33,7 +33,7 @@ class User(AbstractBaseUser):
     is_inactive = models.SmallIntegerField(
         db_column="PASIF", verbose_name="Pasif ?", blank=True, null=True
     )
-    is_admin = True
+    is_admin = False
     is_superuser = models.SmallIntegerField(
         db_column="SUPER", verbose_name='Süper Yetkili ?', blank=True, null=True)
     last_login = None

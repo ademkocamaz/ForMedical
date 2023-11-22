@@ -1,4 +1,3 @@
-{% load i18n %}
 {% load formset_modal_tags %}
 
 <div id="id_{{ formset.prefix }}"
@@ -14,14 +13,14 @@
         {% for form in formset.forms %}
         {% uuid4 dialog_id %}
         <div data-formset-form>
-            {% include 'form/formset/form.html' %}
+            {% include form_template_name %}
         </div>
         {% endfor %}
     </div>
     <script type="form-template" data-formset-empty-form>
         {% escapescript %}
             <div data-formset-form>
-                {% include 'form/formset/form.html' with form=formset.empty_form dialog_id='__dialog_id__' %}
+                {% include form_template_name with form=formset.empty_form dialog_id='__dialog_id__' %}
             </div>
         {% endescapescript %}
     </script>
@@ -47,7 +46,7 @@
             <tbody>  
                 <tr class="empty-table">
                     <td class="empty-table-content text-center" colspan={{ headers|length|add:3 }}>
-                       {% trans "No data" %}   
+                       (Boş)   
                     </td>
                 </tr>
             </tbody>
@@ -66,7 +65,7 @@
         </table>
     </div>
     <div class="d-flex mb-3">
-        <button type="button" class="btn btn-primary btn-sm" data-formset-add>{% trans "Add" %}</button>
-        <button type="button" class="btn btn-danger btn-sm delete-selected ml-1">{% trans "Delete" %}</button>
+        <button type="button" class="btn btn-primary btn-sm" data-formset-add>Ekle</button>
+        <button type="button" class="btn btn-danger btn-sm delete-selected ml-1">Sil</button>
     </div>
 </div>
