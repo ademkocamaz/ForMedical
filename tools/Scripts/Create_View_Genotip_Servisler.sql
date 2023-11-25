@@ -1,17 +1,21 @@
 USE [FORMEDICAL]
 GO
 
-/****** Object:  View [dbo].[VIEW_GENOTIP_KULLAN]    Script Date: 25.11.2023 21:45:52 ******/
+/****** Object:  View [dbo].[VIEW_GENOTIP_SERVISLER]    Script Date: 25.11.2023 21:47:06 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE VIEW [dbo].[VIEW_GENOTIP_KULLAN]
+CREATE VIEW [dbo].[VIEW_GENOTIP_SERVISLER]
 AS
-SELECT        ID, KULLANICIADI, SIFRE, KULLANICI, SUPER, PASIF, GRUP
-FROM            GEN2000.dbo.KULLAN
+SELECT        ID, AD, AKTIF
+FROM            GEN2000.dbo.SERVISLER
+WHERE        (ID IN
+                             (SELECT        SERVISLER_JOIN.ID
+                               FROM            GEN2000.dbo.SERVISLER AS SERVISLER_JOIN INNER JOIN
+                                                         GEN2000.dbo.YATAKDURUM ON SERVISLER_JOIN.ID = GEN2000.dbo.YATAKDURUM.SERVISID))
 GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -85,12 +89,12 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "KULLAN (GEN2000.dbo)"
+         Begin Table = "SERVISLER (GEN2000.dbo)"
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 136
-               Right = 257
+               Bottom = 305
+               Right = 275
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -101,6 +105,30 @@ Begin DesignProperties =
    End
    Begin DataPane = 
       Begin ParameterDefaults = ""
+      End
+      Begin ColumnWidths = 22
+         Width = 284
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
       End
    End
    Begin CriteriaPane = 
@@ -121,10 +149,10 @@ Begin DesignProperties =
       End
    End
 End
-' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'VIEW_GENOTIP_KULLAN'
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'VIEW_GENOTIP_SERVISLER'
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'VIEW_GENOTIP_KULLAN'
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'VIEW_GENOTIP_SERVISLER'
 GO
 
 

@@ -8,6 +8,7 @@ from genotip._model.service import ServiceDefinition
 from genotip._model.bed import Bed
 from form._form.pain import *
 from django.contrib import messages
+from django.urls import reverse_lazy
 # Create your views here.
 
 
@@ -317,15 +318,37 @@ class PainCreateTestView(CreateWithInlinesView):
     form_class = PainForm
     inlines = [PainScaleInline, PainPlaceInline]
     template_name = "form/pain/pain_test.html"
-    
+    index_url = reverse_lazy("index")
+    success_url = reverse_lazy("bed_detail")
+
     def get_context_data(self, **kwargs):
         print(self.kwargs)
         data = super().get_context_data(**kwargs)
         data['bed'] = get_object_or_404(Bed, pk=self.kwargs["bed_id"])
         return data
-    
-    def get_success_url(self):
-        return self.object.get_absolute_url()
+
+    # def get_success_url(self):
+    #     return self.object.get_absolute_url()
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+
+        form.instance.bed = context["bed"]
+        form.instance.service = form.instance.bed.service
+        form.instance.user = self.request.user
+
+        if form.is_valid():
+            form.save()
+            messages.add_message(self.request, messages.WARNING,
+                                 'Ağrı Formu eklendi.')
+        else:
+            messages.add_message(self.request, messages.ERROR,
+                                 form.Meta.model._meta.verbose_name)
+            for error in list(form.errors.values()):
+                messages.add_message(self.request, messages.ERROR, error)
+
+        return super().form_valid(form)
+
 
 class PainUpdateTestView(UpdateWithInlinesView):
     model = Pain

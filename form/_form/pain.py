@@ -12,33 +12,39 @@ from crispy_formset_modal.layout import ModalEditLayout, ModalEditFormsetLayout
 
 # region PainScaleForm
 
+
 class PainScaleForm(forms.ModelForm):
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.helper = ModalEditFormHelper()
+    #     self.helper.layout = ModalEditLayout(
+    #         "pain",
+    #         "description",
+    #         "date",
+    #     )
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.helper = ModalEditFormHelper()
-        self.helper.layout = ModalEditLayout(
-            "pain",
-            "description",
-            "date",
-        )
-    # def __init__(self, *args, **kwargs):
-    #     super(PainScaleForm, self).__init__(*args, **kwargs)
-    #     if self.instance.pk:
-    #         self.fields['description'].widget.attrs['readonly'] = True
-    #         self.fields['date'].widget.attrs['readonly'] = True
+        # if self.instance.pk:
+        #     self.fields['description'].widget.attrs['readonly'] = True
+        #     self.fields['date'].widget.attrs['readonly'] = True
+
+        if self.instance.pk:
+            for field in self.fields:
+                # print(field)
+                self.fields[field].widget.attrs["readonly"] = True
 
     class Meta:
         model = PainScale
         fields = "__all__"
-        # widgets = {
-        #     # "date": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'})
-        #     # "date": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S')),
-        # }
+        widgets = {
+            #     # "date": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'})
+            "date": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S')),
+        }
 
 
 class PainScaleFormSetHelper(FormHelper):
 
-    template = "form/formset.html"
+    template = "bootstrap4/table_inline_formset.html"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -47,6 +53,7 @@ class PainScaleFormSetHelper(FormHelper):
             Field("description",),
             Field("date"),
         )
+        
         self.add_input(
             Submit("submit", "Kaydet")
         )
@@ -67,21 +74,28 @@ class PainScaleInline(InlineFormSetFactory):
     model = PainScale
     form_class = PainScaleForm
     fields = "__all__"
-    factory_kwargs = {"extra": 0, "max_num":3}
+    factory_kwargs = {"extra": 0, "max_num": 3}
 # endregion
 
 # region PainPlaceForm
 
 
 class PainPlaceForm(forms.ModelForm):
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.helper = ModalEditFormHelper()
+    #     self.helper.layout = ModalEditLayout(
+    #         "pain",
+    #         "description",
+    #         "date",
+    #     )
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.helper = ModalEditFormHelper()
-        self.helper.layout = ModalEditLayout(
-            "pain",
-            "description",
-            "date",
-        )
+
+        if self.instance.pk:
+            for field in self.fields:
+                # print(field)
+                self.fields[field].widget.attrs["readonly"] = True
     class Meta:
         model = PainPlace
         fields = "__all__"
@@ -89,7 +103,7 @@ class PainPlaceForm(forms.ModelForm):
 
 class PainPlaceFormSetHelper(FormHelper):
 
-    template = "form/formset.html"
+    template = "bootstrap4/table_inline_formset.html"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -113,11 +127,12 @@ PainPlaceFormSet = inlineformset_factory(
     can_delete=True,
 )
 
+
 class PainPlaceInline(InlineFormSetFactory):
     model = PainPlace
     form_class = PainPlaceForm
     fields = "__all__"
-    factory_kwargs = {"extra": 0, "max_num":3}
+    factory_kwargs = {"extra": 0, "max_num": 3}
 
 # endregion
 
@@ -125,6 +140,13 @@ class PainPlaceInline(InlineFormSetFactory):
 
 
 class PainSeverityForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if self.instance.pk:
+            for field in self.fields:
+                # print(field)
+                self.fields[field].widget.attrs["readonly"] = True
     class Meta:
         model = PainSeverity
         fields = "__all__"
@@ -132,7 +154,7 @@ class PainSeverityForm(forms.ModelForm):
 
 class PainSeverityFormSetHelper(FormHelper):
 
-    template = "form/formset.html"
+    template = "bootstrap4/table_inline_formset.html"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -161,6 +183,13 @@ PainSeverityFormSet = inlineformset_factory(
 
 
 class PainFrequencyForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if self.instance.pk:
+            for field in self.fields:
+                # print(field)
+                self.fields[field].widget.attrs["readonly"] = True
     class Meta:
         model = PainFrequency
         fields = "__all__"
@@ -168,7 +197,7 @@ class PainFrequencyForm(forms.ModelForm):
 
 class PainFrequencyFormSetHelper(FormHelper):
 
-    template = "form/formset.html"
+    template = "bootstrap4/table_inline_formset.html"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -197,6 +226,13 @@ PainFrequencyFormSet = inlineformset_factory(
 
 
 class PainNatureForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if self.instance.pk:
+            for field in self.fields:
+                # print(field)
+                self.fields[field].widget.attrs["readonly"] = True
     class Meta:
         model = PainNature
         fields = "__all__"
@@ -204,7 +240,7 @@ class PainNatureForm(forms.ModelForm):
 
 class PainNatureFormSetHelper(FormHelper):
 
-    template = "form/formset.html"
+    template = "bootstrap4/table_inline_formset.html"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -233,6 +269,13 @@ PainNatureFormSet = inlineformset_factory(
 
 
 class PainFactorAffectingForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if self.instance.pk:
+            for field in self.fields:
+                # print(field)
+                self.fields[field].widget.attrs["readonly"] = True
     class Meta:
         model = PainFactorAffecting
         fields = "__all__"
@@ -240,7 +283,7 @@ class PainFactorAffectingForm(forms.ModelForm):
 
 class PainFactorAffectingFormSetHelper(FormHelper):
 
-    template = "form/formset.html"
+    template = "bootstrap4/table_inline_formset.html"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -269,6 +312,13 @@ PainFactorAffectingFormSet = inlineformset_factory(
 
 
 class PainTargetedLevelForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if self.instance.pk:
+            for field in self.fields:
+                # print(field)
+                self.fields[field].widget.attrs["readonly"] = True
     class Meta:
         model = PainTargetedLevel
         fields = "__all__"
@@ -276,7 +326,7 @@ class PainTargetedLevelForm(forms.ModelForm):
 
 class PainTargetedLevelFormSetHelper(FormHelper):
 
-    template = "form/formset.html"
+    template = "bootstrap4/table_inline_formset.html"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -305,6 +355,13 @@ PainTargetedLevelFormSet = inlineformset_factory(
 
 
 class PainInterventionForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if self.instance.pk:
+            for field in self.fields:
+                # print(field)
+                self.fields[field].widget.attrs["readonly"] = True
     class Meta:
         model = PainIntervention
         fields = "__all__"
@@ -312,7 +369,7 @@ class PainInterventionForm(forms.ModelForm):
 
 class PainInterventionFormSetHelper(FormHelper):
 
-    template = "form/formset.html"
+    template = "bootstrap4/table_inline_formset.html"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -362,6 +419,7 @@ class PainForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
+        
         self.helper.layout = Layout(
             Field("bed"),
             Field("service"),
@@ -371,7 +429,7 @@ class PainForm(forms.ModelForm):
                 """<img src="/static/img/numerik_agri_skalasi.png" class="img-fluid" >"""
             ),
 
-            InlineRadios("numericalPainScale"),
+            InlineRadios("numericalPainScale", readonly=True),
 
             HTML(
                 """<img src="/static/img/yuz_skalasi.png" class="img-fluid" >"""
@@ -399,32 +457,33 @@ class PainForm(forms.ModelForm):
                 css_class="d-flex justify-content-center mb-3",
             ),
 
-            Fieldset(
-                PainScale._meta.verbose_name_plural,
-                ModalEditFormsetLayout(
-                    "PainScaleInline",
-                    list_display=["description", "date"],
-                ),
-            ),
-            Fieldset(
-                PainPlace._meta.verbose_name_plural,
-                ModalEditFormsetLayout(
-                    "PainPlaceInline",
-                    list_display=["description", "date"],
-                ),
-            ),
+            # Fieldset(
+            #     PainScale._meta.verbose_name_plural,
+            #     ModalEditFormsetLayout(
+            #         "PainScaleInline",
+            #         list_display=["description", "date"],
+            #     ),
+            # ),
+            # Fieldset(
+            #     PainPlace._meta.verbose_name_plural,
+            #     ModalEditFormsetLayout(
+            #         "PainPlaceInline",
+            #         list_display=["description", "date"],
+            #     ),
+            # ),
 
-            
-            Div(
-                Submit("submit", "Kaydet", css_class="btn btn-lg btn-warning"),
-                css_class="d-flex justify-content-center mb-3",
-            ),
+
+            # Div(
+            #     Submit("submit", "Kaydet", css_class="btn btn-lg btn-warning"),
+            #     css_class="d-flex justify-content-center mb-3",
+            # ),
         )
-        
-        # if self.instance.pk:
-        #     for field in self.fields:
-        #         field.widget.attrs["readonly"]=True
-        
+
+        if self.instance.pk:
+            for field in self.fields:
+                print(field)
+                self.fields[field].widget.attrs["readonly"]=True
+
     class Meta:
         model = Pain
         fields = "__all__"

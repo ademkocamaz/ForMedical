@@ -1,17 +1,17 @@
 USE [FORMEDICAL]
 GO
 
-/****** Object:  View [dbo].[VIEW_GENOTIP_KULLAN]    Script Date: 25.11.2023 21:45:52 ******/
+/****** Object:  View [dbo].[VIEW_GENOTIP_SERVIS]    Script Date: 25.11.2023 21:46:19 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE VIEW [dbo].[VIEW_GENOTIP_KULLAN]
+CREATE VIEW [dbo].[VIEW_GENOTIP_SERVIS]
 AS
-SELECT        ID, KULLANICIADI, SIFRE, KULLANICI, SUPER, PASIF, GRUP
-FROM            GEN2000.dbo.KULLAN
+SELECT        DOSYANO, GELISNO, SERVIS, DOKTOR, ODA, YATAK, HEMSIRE, GIRISTARIH, CIKISTARIH, GELISID, ID
+FROM            GEN2000.dbo.SERVIS
 GO
 
 EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPane1', @value=N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -85,15 +85,15 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "KULLAN (GEN2000.dbo)"
+         Begin Table = "SERVIS (GEN2000.dbo)"
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 136
-               Right = 257
+               Bottom = 205
+               Right = 412
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 26
          End
       End
    End
@@ -121,10 +121,10 @@ Begin DesignProperties =
       End
    End
 End
-' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'VIEW_GENOTIP_KULLAN'
+' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'VIEW_GENOTIP_SERVIS'
 GO
 
-EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'VIEW_GENOTIP_KULLAN'
+EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'VIEW',@level1name=N'VIEW_GENOTIP_SERVIS'
 GO
 
 

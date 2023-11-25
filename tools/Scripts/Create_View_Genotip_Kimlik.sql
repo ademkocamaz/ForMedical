@@ -1,12 +1,13 @@
 USE [FORMEDICAL]
 GO
 
-/****** Object:  View [dbo].[VIEW_GENOTIP_KIMLIK]    Script Date: 08.10.2023 15:35:45 ******/
+/****** Object:  View [dbo].[VIEW_GENOTIP_KIMLIK]    Script Date: 25.11.2023 21:45:24 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 CREATE VIEW [dbo].[VIEW_GENOTIP_KIMLIK]
 AS

@@ -180,19 +180,14 @@ class Pain(models.Model):
         verbose_name = 'Ağrı Formu'
         verbose_name_plural = 'Ağrı Formları'
 
-
-class PainScale(models.Model):
+class PainDetail(models.Model):
     pain = models.ForeignKey(
         Pain,
         on_delete=models.CASCADE,
         verbose_name='Ağrı Formu',
         related_name="PainScales"
     )
-
-    description = models.TextField(
-        verbose_name='Ağrı Skalası (Numerik Davransal Yüz)',
-    )
-
+    
     date = models.DateTimeField(
         verbose_name='Tarih/Saat',
     )
@@ -208,6 +203,11 @@ class PainScale(models.Model):
         verbose_name='Oluşturulma Tarihi'
     )
 
+class PainScale(PainDetail):
+    description = models.TextField(
+        verbose_name='Ağrı Skalası (Numerik Davransal Yüz)',
+    )
+
     def __str__(self):
         return self.description
 
@@ -216,30 +216,9 @@ class PainScale(models.Model):
         verbose_name_plural = 'Ağrı Skala Kayıtları'
 
 
-class PainPlace(models.Model):
-    pain = models.ForeignKey(
-        Pain,
-        on_delete=models.CASCADE,
-        verbose_name='Ağrı Formu',
-    )
-
+class PainPlace(PainDetail):
     description = models.TextField(
         verbose_name='Ağrı''nın Yeri (Hasta''nın Kendi İfadesi / Hemşire''nin Gözlemi)'
-    )
-
-    date = models.DateTimeField(
-        verbose_name='Tarih/Saat'
-    )
-
-    edited = models.DateTimeField(
-        auto_now=True,
-        verbose_name='Düzenleme Tarihi'
-
-    )
-
-    created = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name='Oluşturulma Tarihi'
     )
 
     def __str__(self):
@@ -250,30 +229,9 @@ class PainPlace(models.Model):
         verbose_name_plural = 'Ağrı Yeri Kayıtları'
 
 
-class PainSeverity(models.Model):
-    pain = models.ForeignKey(
-        Pain,
-        on_delete=models.CASCADE,
-        verbose_name='Ağrı Formu'
-    )
-
+class PainSeverity(PainDetail):
     description = models.TextField(
         verbose_name='Ağrı''nın Şiddeti (Skalalardan Uygun Olan Kullanılır)'
-    )
-
-    date = models.DateTimeField(
-        verbose_name='Tarih/Saat'
-    )
-
-    edited = models.DateTimeField(
-        auto_now=True,
-        verbose_name='Düzenleme Tarihi'
-
-    )
-
-    created = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name='Oluşturulma Tarihi'
     )
 
     def __str__(self):
@@ -284,30 +242,9 @@ class PainSeverity(models.Model):
         verbose_name_plural = 'Ağrı Şiddeti Kayıtları'
 
 
-class PainFrequency(models.Model):
-    pain = models.ForeignKey(
-        Pain,
-        on_delete=models.CASCADE,
-        verbose_name='Ağrı Formu'
-    )
-
+class PainFrequency(PainDetail):
     description = models.TextField(
         verbose_name='Ağrı''nın Sıklığı (Hasta''nın Kendi İfadesi İle)'
-    )
-
-    date = models.DateTimeField(
-        verbose_name='Tarih/Saat'
-    )
-
-    edited = models.DateTimeField(
-        auto_now=True,
-        verbose_name='Düzenleme Tarihi'
-
-    )
-
-    created = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name='Oluşturulma Tarihi'
     )
 
     def __str__(self):
@@ -318,30 +255,9 @@ class PainFrequency(models.Model):
         verbose_name_plural = 'Ağrı Sıklığı Kayıtları'
 
 
-class PainNature(models.Model):
-    pain = models.ForeignKey(
-        Pain,
-        on_delete=models.CASCADE,
-        verbose_name='Ağrı Formu'
-    )
-
+class PainNature(PainDetail):
     description = models.TextField(
         verbose_name='Ağrı''nın Niteliği (Hasta''nın Kendi İfadesi İle)'
-    )
-
-    date = models.DateTimeField(
-        verbose_name='Tarih/Saat'
-    )
-
-    edited = models.DateTimeField(
-        auto_now=True,
-        verbose_name='Düzenleme Tarihi'
-
-    )
-
-    created = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name='Oluşturulma Tarihi'
     )
 
     def __str__(self):
@@ -352,30 +268,9 @@ class PainNature(models.Model):
         verbose_name_plural = 'Ağrı Niteliği Kayıtları'
 
 
-class PainFactorAffecting(models.Model):
-    pain = models.ForeignKey(
-        Pain,
-        on_delete=models.CASCADE,
-        verbose_name='Ağrı Formu'
-    )
-
+class PainFactorAffecting(PainDetail):
     description = models.TextField(
         verbose_name='Ağrı''yı Etkileyen Faktörler (Hasta''nın Kendi İfadesi / Hemşire''nin Gözlemi)'
-    )
-
-    date = models.DateTimeField(
-        verbose_name='Tarih/Saat'
-    )
-
-    edited = models.DateTimeField(
-        auto_now=True,
-        verbose_name='Düzenleme Tarihi'
-
-    )
-
-    created = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name='Oluşturulma Tarihi'
     )
 
     def __str__(self):
@@ -386,30 +281,9 @@ class PainFactorAffecting(models.Model):
         verbose_name_plural = 'Ağrı Faktör Kayıtları'
 
 
-class PainTargetedLevel(models.Model):
-    pain = models.ForeignKey(
-        Pain,
-        on_delete=models.CASCADE,
-        verbose_name='Ağrı Formu'
-    )
-
+class PainTargetedLevel(PainDetail):
     description = models.TextField(
         verbose_name='Hedeflenen Ağrı Düzeyi (Hasta İle İşbirliği Halinde Hemşire Tarafından)'
-    )
-
-    date = models.DateTimeField(
-        verbose_name='Tarih/Saat'
-    )
-
-    edited = models.DateTimeField(
-        auto_now=True,
-        verbose_name='Düzenleme Tarihi'
-
-    )
-
-    created = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name='Oluşturulma Tarihi'
     )
 
     def __str__(self):
@@ -420,30 +294,12 @@ class PainTargetedLevel(models.Model):
         verbose_name_plural = 'Hedeflenen Ağrı Düzeyi Kayıtları'
 
 
-class PainIntervention(models.Model):
-    pain = models.ForeignKey(
-        Pain,
-        on_delete=models.CASCADE,
-        verbose_name='Ağrı Formu'
-    )
+class PainIntervention(PainDetail):
+    
     pain_severity=models.TextField(verbose_name='Ağrının Şiddeti', blank=True, null=True)
     medicine_detail=models.TextField(verbose_name='Yapılan Uygulama - İlaç Adı, Dozu ve Uygulama Yolu', blank=True, null=True)
     out_of_medicine=models.TextField(verbose_name='Yapılan Uygulama - İlaç Dışı Uygulama', blank=True, null=True)
     note=models.TextField(verbose_name='Not', blank=True, null=True)
-
-    date = models.DateTimeField(
-        verbose_name='Tarih/Saat'
-    )
-
-    edited = models.DateTimeField(
-        auto_now=True,
-        verbose_name='Düzenleme Tarihi'
-    )
-
-    created = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name='Oluşturulma Tarihi'
-    )
 
     def __str__(self):
         return self.medicine_detail

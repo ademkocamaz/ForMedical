@@ -1,0 +1,14 @@
+SELECT
+    DOSYANO,
+    GELISNO,
+    SERVIS,
+    DOKTOR,
+    ODA,
+    YATAK,
+    HEMSIRE,
+    GIRISTARIH,
+    CIKISTARIH,
+    GELISID,
+    ID
+FROM
+    GEN2000.dbo.SERVIS

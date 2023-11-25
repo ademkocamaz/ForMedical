@@ -15,6 +15,7 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
+            request.session.set_expiry(300)
             request.session["service"] = service
             return redirect("index")
         else:
@@ -25,3 +26,7 @@ def login(request):
     context = {"login_form": login_form}
 
     return render(request, "genotip/login.html", context)
+
+def logout(request):
+    auth.logout(request)
+    return redirect("index")
