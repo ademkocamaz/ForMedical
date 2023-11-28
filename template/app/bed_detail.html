@@ -193,6 +193,41 @@
             </div>
           </div>
           {% endif %}
+
+          {% if observation_forms %}
+          <div class="row">
+            <div class="col">
+              <div class="card card-warning collapsed-card">
+                <div class="card-header" data-card-widget="collapse">
+                  <h4 class="card-title">{% formset_verbose_name_plural observation_forms %}</h4>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row bg-warning">
+                    <div class="col">Yatak ve Oda Bilgileri</div>
+                    <div class="col">Servis Bilgileri</div>
+                    <div class="col">Düzenleme Tarihi</div>
+                    <div class="col">Oluşturma Tarihi</div>
+                    <div class="col">Seçenekler</div>
+                  </div>
+                  {% for observation_form in observation_forms %}
+
+                  <div class="row border border-warning">
+                    <div class="col"><a href="{% url 'observation_update' bed.id observation_form.id %}">{{ observation_form.bed }}</a></div>
+                    <div class="col">{{ observation_form.service }}</div>
+                    <div class="col">{{ observation_form.edited }}</div>
+                    <div class="col">{{ observation_form.created }}</div>
+                    <div class="col"><a href="{% url 'observation_print' bed.id observation_form.id %}" target="_blank"><ion-icon size="large" name="print-outline"></ion-icon></a></div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
         </div>
       </div>
     </div>

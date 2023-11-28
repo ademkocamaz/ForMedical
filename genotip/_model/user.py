@@ -2,6 +2,7 @@ from django.db import models
 
 from django.contrib.auth.models import AbstractBaseUser
 
+
 class UserManager(models.Manager):
     use_in_migrations = True
 
@@ -33,9 +34,16 @@ class User(AbstractBaseUser):
     is_inactive = models.SmallIntegerField(
         db_column="PASIF", verbose_name="Pasif ?", blank=True, null=True
     )
+
+    is_superuser = models.CharField(
+        db_column="SUPER", 
+        verbose_name='Süper Yetkili ?', 
+        blank=True, 
+        null=True,
+        max_length=1
+    )
+    
     is_admin = False
-    is_superuser = models.SmallIntegerField(
-        db_column="SUPER", verbose_name='Süper Yetkili ?', blank=True, null=True)
     last_login = None
 
     objects = UserManager()
@@ -60,7 +68,11 @@ class User(AbstractBaseUser):
     def is_staff(self):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
-        return self.is_admin
+        if self.is_superuser=="1":
+            return True
+        else:
+            return False
+        # return True if self.is_superuser == 1 else False
 
     def set_password(self, raw_password):
         self.password = raw_password
@@ -70,7 +82,7 @@ class User(AbstractBaseUser):
         Return a boolean of whether the raw_password was correct. Handles
         hashing formats behind the scenes.
         """
-        if self.password==raw_password:
+        if self.password == raw_password:
             return True
         else:
             return False

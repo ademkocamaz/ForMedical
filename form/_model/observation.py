@@ -35,23 +35,25 @@ class Observation(models.Model):
         db_constraint=False,
     )
 
-    date = models.DateTimeField(
-        verbose_name='Tarih/Saat',
-    )
+    # aşağıdaki 3 alan zaten hasta bilgilerinde geliyor ve tarih created olarak zaten alıyoruz
 
-    doctor = models.CharField(
-        verbose_name="Doktor Adı / Soyadı",
-        max_length=100,
-        blank=True,
-        null=True,
-    )
+    # date = models.DateTimeField(
+    #     verbose_name='Tarih/Saat',
+    # )
 
-    section = models.CharField(
-        verbose_name="Bölüm",
-        max_length=100,
-        blank=True,
-        null=True,
-    )
+    # doctor = models.CharField(
+    #     verbose_name="Doktor Adı / Soyadı",
+    #     max_length=100,
+    #     blank=True,
+    #     null=True,
+    # )
+
+    # section = models.CharField(
+    #     verbose_name="Bölüm",
+    #     max_length=100,
+    #     blank=True,
+    #     null=True,
+    # )
 
     kilogram = models.CharField(
         verbose_name="Kilo (kg)",
@@ -143,45 +145,51 @@ class ObservationPageOneDetails(ObservationDetail):
 
 class ObservationPageTwoDetails(ObservationDetail):
     oral_care = models.DateTimeField(
-        verbose_name='Hijyen - Ağız Bakımı - Tarih/Saat',
+        verbose_name='Ağız Bakımı - Uygulama Tarih/Saat',
         blank=True,
         null=True,
     )
 
     hand_facial_care = models.DateTimeField(
-        verbose_name='Hijyen - El/Yüz Bakımı - Tarih/Saat',
+        verbose_name='El/Yüz Bakımı - Uygulama Tarih/Saat',
         blank=True,
         null=True,
     )
 
     body_bath = models.DateTimeField(
-        verbose_name='Hijyen - Vücut Banyosu - Tarih/Saat',
+        verbose_name='Vücut Banyosu - Uygulama Tarih/Saat',
         blank=True,
         null=True,
     )
 
     perineal_care = models.DateTimeField(
-        verbose_name='Hijyen - Perine Bakımı - Tarih/Saat',
+        verbose_name='Perine Bakımı - Uygulama Tarih/Saat',
         blank=True,
         null=True,
     )
 
     toenail_care = models.DateTimeField(
-        verbose_name='Hijyen - Ayak/Tırnak Bakımı - Tarih/Saat',
+        verbose_name='Ayak/Tırnak Bakımı - Uygulama Tarih/Saat',
         blank=True,
         null=True,
     )
 
     dressing_change = models.DateTimeField(
-        verbose_name='Hijyen - Pansuman Değişimi - Tarih/Saat',
+        verbose_name='Pansuman Değişimi - Uygulama Tarih/Saat',
         blank=True,
         null=True,
     )
+
+    class Meta:
+        verbose_name = "Hijyen Bakımı"
+        verbose_name_plural = "Hijyen Bakım Kayıtları"
 
 
 class ObservationTracking(ObservationDetail):
     planning = models.DateTimeField(
         verbose_name='Planlama - Tarih/Saat',
+        blank=True,
+        null=True,
     )
 
     implementation = models.DateTimeField(
@@ -282,31 +290,40 @@ class ObservationTracking_RadiologicalExamination(ObservationTracking):
 
 class ObservationInsertionOpening(ObservationDetail):
     cvp_catheter = models.DateTimeField(
-        verbose_name='Takılma / Açılma - CVP Kateteri - Tarih/Saat',
+        verbose_name='CVP Kateteri - Tarih/Saat',
         blank=True,
         null=True,
     )
 
     urinary_catheter = models.DateTimeField(
-        verbose_name='Takılma / Açılma - Üriner Kateter - Tarih/Saat',
+        verbose_name='Üriner Kateter - Tarih/Saat',
         blank=True,
         null=True,
     )
 
     peripheral_catheter = models.DateTimeField(
-        verbose_name='Takılma / Açılma - Periferik Kateter - Tarih/Saat',
+        verbose_name='Periferik Kateter - Tarih/Saat',
         blank=True,
         null=True,
     )
 
     urinary_catheter = models.DateTimeField(
-        verbose_name='Takılma / Açılma - NG Sonda - Tarih/Saat',
+        verbose_name='NG Sonda - Tarih/Saat',
         blank=True,
         null=True,
     )
+
+    class Meta:
+        verbose_name = "Takılma / Açılma"
+        verbose_name_plural = "Takılma / Açılma Kayıtları"
 
 
 class ObservationNote(ObservationDetail):
     note = models.TextField(
         verbose_name="Hemşire İzlem Notu",
     )
+
+    class Meta:
+        verbose_name="Hemşire İzlem Notu"
+        verbose_name_plural="Hemşire İzlem Notu Kayıtları"
+        

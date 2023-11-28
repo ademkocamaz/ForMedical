@@ -247,8 +247,6 @@ class PainAdmin(DjangoObjectActions, admin.ModelAdmin):
     # readonly_fields=("patient",)
     # list_editable = ('fileNumber',)
 
-    search_fields = ("service",)
-
     autocomplete_fields = ("service",)
 
     inlines = [

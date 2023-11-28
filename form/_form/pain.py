@@ -429,7 +429,7 @@ class PainForm(forms.ModelForm):
                 """<img src="/static/img/numerik_agri_skalasi.png" class="img-fluid" >"""
             ),
 
-            InlineRadios("numericalPainScale", readonly=True),
+            InlineRadios("numericalPainScale"),
 
             HTML(
                 """<img src="/static/img/yuz_skalasi.png" class="img-fluid" >"""
