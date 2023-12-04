@@ -3,7 +3,7 @@
 {% load verbose_name %}
 
 {% block title %}
-  Ağrı Formu - {{ pain.service }}
+  Ağrı Değerlendirme Formu - {{ pain.service.visit.patient }}
 {% endblock %}
 
 {% block body %}
@@ -31,7 +31,6 @@
       <div class="col">Yayın Tarihi: 12.03.2016</div>
       <div class="col">Revizyon No: 00</div>
       <div class="col">Revizyon Tarihi:</div>
-      <div class="col">Sayfa No: 2/1</div>
     </div>
 
     <div class="row">
@@ -60,7 +59,7 @@
               </div>
               <div class="col">
                 <div class="row">
-                  <div class="col">T.C. Kimlik Numarası:</div>
+                  <div class="col">Vatandaşlık Numarası:</div>
                   <div class="col">{{ pain.service.visit.patient.vatandaslikno }}</div>
                 </div>
 

@@ -8,7 +8,7 @@ from django.contrib import messages
 
 # Create your views here.
 from app._view.pain import pain, pain_print, pain_update
-from app._view.observation import Observation_CreateView
+from app._view.observation import Observation_CreateView, Observation_UpdateView, observation_print
 
 
 @login_required(login_url="/login/")

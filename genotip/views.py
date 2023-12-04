@@ -15,7 +15,7 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            request.session.set_expiry(300)
+            # request.session.set_expiry(300) # 5 dk oturum süresi için.
             request.session["service"] = service
             return redirect("index")
         else:

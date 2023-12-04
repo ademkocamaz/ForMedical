@@ -43,30 +43,30 @@
                 <h4>{{ bed.durum }}</h4>
               </div>
               <div class="icon">
-                <i class="ion"><ion-icon name="bed"></ion-icon></ion-icon></i>
+                <i class="ion"><ion-icon name="bed"></ion-icon></i>
               </div>
               {% if bed.service.visit.patient.cinsiyet == 'KADIN' %}
-              <div class="icon">
-                <i class="ion"><ion-icon name="woman"></ion-icon></i>
-              </div>
+                <div class="icon">
+                  <i class="ion"><ion-icon name="woman"></ion-icon></i>
+                </div>
               {% else %}
-              <div class="icon">
-                <i class="ion"><ion-icon name="man"></ion-icon></i>
-              </div>
+                <div class="icon">
+                  <i class="ion"><ion-icon name="man"></ion-icon></i>
+                </div>
               {% endif %}
               <div class="small-box-footer">
-                
-                <div class="card-header p-0"><h5>Dosya No: {{ bed.service.visit.patient.dosyano }}</h5></div>
-                <div class="card-header p-0"><h5>Doktor: {{ bed.service.doktor }}</h5></div>
-                <div class="card-header p-0"><h5>Poliklinik: {{ bed.service.visit.poliklinik }}</h5></div>
-                <div class="card-body">
-                  <h6>{{ bed.service.visit.patient.ad }} {{ bed.service.visit.patient.soyad }}</h6>
-                  <h6>{{ bed.service.visit.patient.cinsiyet }}</h6>
+                <div class="row">
+                  <div class="col">Dosya: {{ bed.service.visit.patient.dosyano }}</div>
+                  <div class="col">Poliklinik: {{ bed.service.visit.poliklinik }}</div>
                 </div>
-                
-                
+                <div class="row">
+                  <div class="col">Doktor: {{ bed.service.doktor }}</div>
+                </div>
+                <div class="row">
+                  <div class="col">Adı Soyadı: {{ bed.service.visit.patient.ad }} {{ bed.service.visit.patient.soyad }}</div>
+                  <div class="col">Cinsiyet: {{ bed.service.visit.patient.cinsiyet }}</div>
+                </div>
               </div>
-              
             </div>
             <!-- small box -->
           </a>
@@ -80,6 +80,17 @@
               </div>
               <div class="icon">
                 <i class="ion"><ion-icon name="bed-outline"></ion-icon></i>
+              </div>
+              <div class="small-box-footer">
+                <div class="row">
+                  <div class="col">&nbsp;</div>
+                </div>
+                <div class="row">
+                  <div class="col">&nbsp;</div>
+                </div>
+                <div class="row">
+                  <div class="col">&nbsp;</div>
+                </div>
               </div>
             </div>
             <!-- small box -->
@@ -106,21 +117,23 @@
               <div class="icon">
                 <i class="ion"><ion-icon name="woman"></ion-icon></i>
               </div>
-              {% else %}
+            {% else %}
               <div class="icon">
                 <i class="ion"><ion-icon name="man"></ion-icon></i>
               </div>
-              {% endif %}
+            {% endif %}
             <div class="small-box-footer">
-              
-                <div class="card-header p-0"><h5>Dosya No: {{ bed.service.visit.patient.dosyano }}</h5></div>
-                <div class="card-header p-0"><h5>Doktor: {{ bed.service.doktor }}</h5></div>
-                <div class="card-header p-0"><h5>Poliklinik: {{ bed.service.visit.poliklinik }}</h5></div>
-                <div class="card-body">
-                  <h6>{{ bed.service.visit.patient.ad }} {{ bed.service.visit.patient.soyad }}</h6>
-                  <h6>{{ bed.service.visit.patient.cinsiyet }}</h6>
-                </div>
-              
+              <div class="row">
+                <div class="col">Dos.:{{ bed.service.visit.patient.dosyano }}</div>
+                <div class="col">Pol.:{{ bed.service.visit.poliklinik }}</div>
+              </div>
+              <div class="row">
+                <div class="col">Dok.: {{ bed.service.doktor }}</div>
+              </div>
+              <div class="row">
+                <div class="col">{{ bed.service.visit.patient.ad }} {{ bed.service.visit.patient.soyad }}</div>
+                <div class="col">Cinsiyet: {{ bed.service.visit.patient.cinsiyet }}</div>
+              </div>
             </div>
           </div>
           <!-- small box -->
@@ -135,6 +148,17 @@
             </div>
             <div class="icon">
               <i class="ion"><ion-icon name="bed-outline"></ion-icon></i>
+            </div>
+            <div class="small-box-footer">
+              <div class="row">
+                <div class="col">&nbsp;</div>
+              </div>
+              <div class="row">
+                <div class="col">&nbsp;</div>
+              </div>
+              <div class="row">
+                <div class="col">&nbsp;</div>
+              </div>
             </div>
           </div>
           <!-- small box -->

@@ -3,8 +3,8 @@ from django.forms import inlineformset_factory
 
 from form._model.observation import (
     Observation,
-    ObservationPageOneDetails,
-    ObservationPageTwoDetails,
+    ObservationPageOneDetail,
+    ObservationPageTwoDetail,
     ObservationTracking_PTaPTT,
     ObservationTracking_Hemogram,
     ObservationTracking_BreathingExercise,
@@ -65,11 +65,16 @@ class Observation_Form(forms.ModelForm):
                     Field("preliminary_diagnosis"),
                 ),
             ),
+            
+            Div(
+                Submit("submit", "Kaydet", css_class="btn btn-lg btn-warning"),
+                css_class="d-flex justify-content-center mb-3",
+            ),
 
             Fieldset(
-                ObservationPageOneDetails._meta.verbose_name_plural,
+                ObservationPageOneDetail._meta.verbose_name_plural,
                 ModalEditFormsetLayout(
-                    "ObservationPageOneDetails_Inline",
+                    "ObservationPageOneDetail_Inline",
                     # list_display=[
                     #     field.name
                     #     for field in ObservationPageOneDetails._meta.fields
@@ -79,9 +84,9 @@ class Observation_Form(forms.ModelForm):
             ),
 
             Fieldset(
-                ObservationPageTwoDetails._meta.verbose_name_plural,
+                ObservationPageTwoDetail._meta.verbose_name_plural,
                 ModalEditFormsetLayout(
-                    "ObservationPageTwoDetails_Inline",
+                    "ObservationPageTwoDetail_Inline",
                 ),
             ),
 
@@ -245,15 +250,15 @@ class ObservationPageOneDetails_Form(forms.ModelForm):
         )
 
     class Meta:
-        model = ObservationPageOneDetails
+        model = ObservationPageOneDetail
         fields = "__all__"
         widgets = {
-            "date": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'}),
+            "date": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
         }
 
 
-class ObservationPageOneDetails_Inline(InlineFormSetFactory):
-    model = ObservationPageOneDetails
+class ObservationPageOneDetail_Inline(InlineFormSetFactory):
+    model = ObservationPageOneDetail
     form_class = ObservationPageOneDetails_Form
     fields = "__all__"
     factory_kwargs = {"extra": 0, "max_num": 30}
@@ -291,20 +296,20 @@ class ObservationPageTwoDetails_Form(forms.ModelForm):
         )
 
     class Meta:
-        model = ObservationPageTwoDetails
+        model = ObservationPageTwoDetail
         fields = "__all__"
         widgets = {
-            "oral_care": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'}),
-            "hand_facial_care": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'}),
-            "body_bath": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'}),
-            "perineal_care": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'}),
-            "toenail_care": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'}),
-            "dressing_change": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'}),
+            "oral_care": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+            "hand_facial_care": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+            "body_bath": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+            "perineal_care": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+            "toenail_care": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+            "dressing_change": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
         }
 
 
-class ObservationPageTwoDetails_Inline(InlineFormSetFactory):
-    model = ObservationPageTwoDetails
+class ObservationPageTwoDetail_Inline(InlineFormSetFactory):
+    model = ObservationPageTwoDetail
     form_class = ObservationPageTwoDetails_Form
     fields = "__all__"
     factory_kwargs = {"extra": 0, "max_num": 1}
@@ -330,8 +335,8 @@ class ObservationTracking_BaseForm(forms.ModelForm):
         model = None
         fields = "__all__"
         widgets = {
-            "planning": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'}),
-            "implementation": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'}),
+            "planning": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+            "implementation": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
         }
 
 
@@ -473,6 +478,24 @@ class ObservationTracking_GodePlusPlusPlus_Inline(ObservationTracking_BaseInline
 
 
 class ObservationTracking_RadiologicalExamination_Form(ObservationTracking_BaseForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = ModalEditFormHelper()
+        self.helper.layout = ModalEditLayout(
+            Row(
+                Column(
+                    Field("planning"),
+                ),
+                Column(
+                    Field("implementation"),
+                ),
+            ),
+            Row(
+                Column(
+                    Field("examination_name"),
+                ),
+            ),
+        )
     class Meta(ObservationTracking_BaseForm.Meta):
         model = ObservationTracking_RadiologicalExamination
 
@@ -509,10 +532,10 @@ class ObservationInsertionOpening_Form(forms.ModelForm):
         model = ObservationInsertionOpening
         fields = "__all__"
         widgets = {
-            "cvp_catheter": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'}),
-            "urinary_catheter": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'}),
-            "peripheral_catheter": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'}),
-            "urinary_catheter": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'}),
+            "cvp_catheter": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+            "urinary_catheter": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+            "peripheral_catheter": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+            "urinary_catheter": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
         }
 
 class ObservationInsertionOpening_Inline(InlineFormSetFactory):

@@ -204,3 +204,7 @@ MESSAGE_TAGS = {
 # TEMPUS_DOMINUS_TIME_FORMAT="HH:mm:ss"
 
 DATETIME_FORMAT = "%d.%m.%Y %H:%M:%S"
+
+# DATETIME_INPUT_FORMATS = [
+#     "%d.%m.%Y %H:%M:%S",
+# ]

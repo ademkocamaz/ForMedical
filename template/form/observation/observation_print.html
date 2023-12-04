@@ -1,0 +1,767 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load verbose_name %}
+
+{% block title %}
+  Hemşire Gözlem Formu - {{ observation.service.visit.patient }}
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <div class="row align-items-center text-center">
+              <div class="col">
+                <img src="{% static 'img/logo_100x100.png' %}" alt="" />
+              </div>
+              <div class="col">HEMŞİRE GÖZLEM FORMU</div>
+              <div class="col">
+                <img src="{% static 'img/saglik-bakanligi-logo_100x100.png' %}" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">Döküman No: HB.FR.04</div>
+      <div class="col">Yayın Tarihi: 09.04.2010</div>
+      <div class="col">Revizyon No: 05</div>
+      <div class="col">Revizyon Tarihi: 01.01.2022</div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card card-outline card-primary">
+          <div class="card-header">
+            <h5 class="card-title">HASTA BİLGİLERİ</h5>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <strong>Adı ve Soyadı:</strong>
+                  </div>
+                  <div class="col">{{ observation.service.visit.patient.ad }} {{ observation.service.visit.patient.soyad }}</div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <strong>Dosya Numarası:</strong>
+                  </div>
+                  <div class="col">{{ observation.service.dosyano }}</div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <strong>Doğum Tarihi:</strong>
+                  </div>
+                  <div class="col">{{ observation.service.visit.patient.dogumtarih.date }}</div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <strong>Doktor:</strong>
+                  </div>
+                  <div class="col">{{ observation.service.doktor }}</div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <strong>Vatandaşlık Numarası:</strong>
+                  </div>
+                  <div class="col">{{ observation.service.visit.patient.vatandaslikno }}</div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <strong>Cinsiyeti:</strong>
+                  </div>
+                  <div class="col">{{ observation.service.visit.patient.cinsiyet }}</div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <strong>Poliklinik:</strong>
+                  </div>
+                  <div class="col">{{ observation.service.visit.poliklinik }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="card card-outline card-primary">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <p class="card-text">
+                  <strong>Tarih:</strong> {{ observation.created }}
+                </p>
+              </div>
+              <div class="col">
+                <p class="card-text">
+                  <strong>Kilo (kg):</strong> {{ observation.kilogram }}
+                </p>
+              </div>
+              <div class="col">
+                <p class="card-text">
+                  <strong>Boy (cm):</strong> {{ observation.height }}
+                </p>
+              </div>
+              <div class="col">
+                <p class="card-text">
+                  <strong>Ön Tanı / Tanı:</strong> {{ observation.preliminary_diagnosis }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% if observation_pageonedetails %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_pageonedetails.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_pageonedetail in observation_pageonedetails %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Tarih/Saat</th>
+                        <th>Vücut Isısı</th>
+                        <th>Nabız</th>
+                        <th>Kan Basıncı</th>
+                        <th>Solunum Sayısı</th>
+                        <th>Oksijen Satürasyonu</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_pageonedetail.date|default_if_none:'-' }}</td>
+                      <td>{{ observation_pageonedetail.body_temperature|default_if_none:'-' }}</td>
+                      <td>{{ observation_pageonedetail.pulse|default_if_none:'-' }}</td>
+                      <td>{{ observation_pageonedetail.blood_pressure|default_if_none:'-' }}</td>
+                      <td>{{ observation_pageonedetail.number_of_breaths|default_if_none:'-' }}</td>
+                      <td>{{ observation_pageonedetail.oxygen_saturation|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_pagetwodetails %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_pagetwodetails.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_pagetwodetail in observation_pagetwodetails %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Ağız Bakımı - Uygulama Tarih/Saat</th>
+                        <th>El/Yüz Bakımı - Uygulama Tarih/Saat</th>
+                        <th>Vücut Banyosu - Uygulama Tarih/Saat</th>
+                        <th>Perine Bakımı - Uygulama Tarih/Saat</th>
+                        <th>Ayak/Tırnak Bakımı - Uygulama Tarih/Saat</th>
+                        <th>Pansuman Değişimi - Uygulama Tarih/Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_pagetwodetail.oral_care|default_if_none:'-' }}</td>
+                      <td>{{ observation_pagetwodetail.hand_facial_care|default_if_none:'-' }}</td>
+                      <td>{{ observation_pagetwodetail.body_bath|default_if_none:'-' }}</td>
+                      <td>{{ observation_pagetwodetail.perineal_care|default_if_none:'-' }}</td>
+                      <td>{{ observation_pagetwodetail.toenail_care|default_if_none:'-' }}</td>
+                      <td>{{ observation_pagetwodetail.dressing_change|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_tracking_ptaptts %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_tracking_ptaptts.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_tracking_ptaptt in observation_tracking_ptaptts %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Planlama - Tarih/Saat</th>
+                        <th>Uygulama - Tarih/Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_tracking_ptaptt.planning|default_if_none:'-' }}</td>
+                      <td>{{ observation_tracking_ptaptt.implementation|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_tracking_hemograms %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_tracking_hemograms.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_tracking_hemogram in observation_tracking_hemograms %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Planlama - Tarih/Saat</th>
+                        <th>Uygulama - Tarih/Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_tracking_hemogram.planning|default_if_none:'-' }}</td>
+                      <td>{{ observation_tracking_hemogram.implementation|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_tracking_breathingexercises %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_tracking_breathingexercises.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_tracking_breathingexercise in observation_tracking_breathingexercises %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Planlama - Tarih/Saat</th>
+                        <th>Uygulama - Tarih/Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_tracking_breathingexercise.planning|default_if_none:'-' }}</td>
+                      <td>{{ observation_tracking_breathingexercise.implementation|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_tracking_cvps %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_tracking_cvps.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_tracking_cvp in observation_tracking_cvps %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Planlama - Tarih/Saat</th>
+                        <th>Uygulama - Tarih/Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_tracking_cvp.planning|default_if_none:'-' }}</td>
+                      <td>{{ observation_tracking_cvp.implementation|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_tracking_steamtreatments %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_tracking_steamtreatments.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_tracking_steamtreatment in observation_tracking_steamtreatments %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Planlama - Tarih/Saat</th>
+                        <th>Uygulama - Tarih/Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_tracking_steamtreatment.planning|default_if_none:'-' }}</td>
+                      <td>{{ observation_tracking_steamtreatment.implementation|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_tracking_aspirations %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_tracking_aspirations.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_tracking_aspiration in observation_tracking_aspirations %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Planlama - Tarih/Saat</th>
+                        <th>Uygulama - Tarih/Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_tracking_aspiration.planning|default_if_none:'-' }}</td>
+                      <td>{{ observation_tracking_aspiration.implementation|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_tracking_ekgs %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_tracking_ekgs.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_tracking_ekg in observation_tracking_ekgs %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Planlama - Tarih/Saat</th>
+                        <th>Uygulama - Tarih/Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_tracking_ekg.planning|default_if_none:'-' }}</td>
+                      <td>{{ observation_tracking_ekg.implementation|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_tracking_sandbagapplications %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_tracking_sandbagapplications.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_tracking_sandbagapplication in observation_tracking_sandbagapplications %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Planlama - Tarih/Saat</th>
+                        <th>Uygulama - Tarih/Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_tracking_sandbagapplication.planning|default_if_none:'-' }}</td>
+                      <td>{{ observation_tracking_sandbagapplication.implementation|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_tracking_icebagapplications %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_tracking_icebagapplications.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_tracking_icebagapplication in observation_tracking_icebagapplications %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Planlama - Tarih/Saat</th>
+                        <th>Uygulama - Tarih/Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_tracking_icebagapplication.planning|default_if_none:'-' }}</td>
+                      <td>{{ observation_tracking_icebagapplication.implementation|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_tracking_coldhotapplications %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_tracking_coldhotapplications.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_tracking_coldhotapplication in observation_tracking_coldhotapplications %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Planlama - Tarih/Saat</th>
+                        <th>Uygulama - Tarih/Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_tracking_coldhotapplication.planning|default_if_none:'-' }}</td>
+                      <td>{{ observation_tracking_coldhotapplication.implementation|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_tracking_godeplusses %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_tracking_godeplusses.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_tracking_godeplus in observation_tracking_godeplusses %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Planlama - Tarih/Saat</th>
+                        <th>Uygulama - Tarih/Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_tracking_godeplus.planning|default_if_none:'-' }}</td>
+                      <td>{{ observation_tracking_godeplus.implementation|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_tracking_godeplusplusses %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_tracking_godeplusplusses.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_tracking_godeplusplus in observation_tracking_godeplusplusses %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Planlama - Tarih/Saat</th>
+                        <th>Uygulama - Tarih/Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_tracking_godeplusplus.planning|default_if_none:'-' }}</td>
+                      <td>{{ observation_tracking_godeplusplus.implementation|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_tracking_godeplusplusplusses %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_tracking_godeplusplusplusses.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_tracking_godeplusplusplus in observation_tracking_godeplusplusplusses %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Planlama - Tarih/Saat</th>
+                        <th>Uygulama - Tarih/Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_tracking_godeplusplusplus.planning|default_if_none:'-' }}</td>
+                      <td>{{ observation_tracking_godeplusplusplus.implementation|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_tracking_radiologicalexaminations %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_tracking_radiologicalexaminations.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_tracking_radiologicalexamination in observation_tracking_radiologicalexaminations %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Planlama - Tarih/Saat</th>
+                        <th>Uygulama - Tarih/Saat</th>
+                        <th>Tetkik Adı</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_tracking_radiologicalexamination.planning|default_if_none:'-' }}</td>
+                      <td>{{ observation_tracking_radiologicalexamination.implementation|default_if_none:'-' }}</td>
+                      <td>{{ observation_tracking_radiologicalexamination.examination_name|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_insertionopenings %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_insertionopenings.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_insertionopening in observation_insertionopenings %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>CVP Kateteri - Tarih/Saat</th>
+                        <th>Üriner Kateter - Tarih/Saat</th>
+                        <th>Periferik Kateter - Tarih/Saat</th>
+                        <th>NG Sonda - Tarih/Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_insertionopening.cvp_catheter|default_if_none:'-' }}</td>
+                      <td>{{ observation_insertionopening.urinary_catheter|default_if_none:'-' }}</td>
+                      <td>{{ observation_insertionopening.peripheral_catheter|default_if_none:'-' }}</td>
+                      <td>{{ observation_insertionopening.ng_probe|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if observation_notes %}
+      <div class="row">
+        <div class="col">
+          <div class="card card-outline card-primary">
+            <div class="card-header">
+              <h5 class="card-title">{% verbose_name_plural observation_notes.first %}</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                {% for observation_note in observation_notes %}
+                  {% if forloop.first %}
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Not</th>
+                        <th>Tarih / Saat</th>
+                      </tr>
+                    </thead>
+                  {% endif %}
+                  <tbody>
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ observation_note.note|default_if_none:'-' }}</td>
+                      <td>{{ observation_note.created|default_if_none:'-' }}</td>
+                    </tr>
+                  </tbody>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+{% endblock %}

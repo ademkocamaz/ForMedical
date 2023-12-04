@@ -98,7 +98,7 @@ class ObservationDetail(models.Model):
     )
 
 
-class ObservationPageOneDetails(ObservationDetail):
+class ObservationPageOneDetail(ObservationDetail):
     date = models.DateTimeField(
         verbose_name='Tarih/Saat',
     )
@@ -143,7 +143,7 @@ class ObservationPageOneDetails(ObservationDetail):
         verbose_name_plural = "Hemşire Gözlem Formu Birinci Sayfa Kayıtları"
 
 
-class ObservationPageTwoDetails(ObservationDetail):
+class ObservationPageTwoDetail(ObservationDetail):
     oral_care = models.DateTimeField(
         verbose_name='Ağız Bakımı - Uygulama Tarih/Saat',
         blank=True,
@@ -194,6 +194,8 @@ class ObservationTracking(ObservationDetail):
 
     implementation = models.DateTimeField(
         verbose_name='Uygulama - Tarih/Saat',
+        blank=True,
+        null=True,
     )
 
 
@@ -307,7 +309,7 @@ class ObservationInsertionOpening(ObservationDetail):
         null=True,
     )
 
-    urinary_catheter = models.DateTimeField(
+    ng_probe = models.DateTimeField(
         verbose_name='NG Sonda - Tarih/Saat',
         blank=True,
         null=True,
