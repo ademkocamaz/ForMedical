@@ -38,7 +38,7 @@ class PainScaleForm(forms.ModelForm):
         fields = "__all__"
         widgets = {
             #     # "date": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S'), attrs={'type': 'datetime-local'})
-            "date": forms.DateTimeInput(format=('%d.%m.%Y %H:%M:%S')),
+            "date": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
         }
 
 
@@ -99,6 +99,9 @@ class PainPlaceForm(forms.ModelForm):
     class Meta:
         model = PainPlace
         fields = "__all__"
+        widgets = {
+            "date": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+        }
 
 
 class PainPlaceFormSetHelper(FormHelper):
@@ -150,6 +153,9 @@ class PainSeverityForm(forms.ModelForm):
     class Meta:
         model = PainSeverity
         fields = "__all__"
+        widgets = {
+            "date": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+        }
 
 
 class PainSeverityFormSetHelper(FormHelper):
@@ -193,6 +199,9 @@ class PainFrequencyForm(forms.ModelForm):
     class Meta:
         model = PainFrequency
         fields = "__all__"
+        widgets = {
+            "date": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+        }
 
 
 class PainFrequencyFormSetHelper(FormHelper):
@@ -236,6 +245,9 @@ class PainNatureForm(forms.ModelForm):
     class Meta:
         model = PainNature
         fields = "__all__"
+        widgets = {
+            "date": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+        }
 
 
 class PainNatureFormSetHelper(FormHelper):
@@ -279,6 +291,9 @@ class PainFactorAffectingForm(forms.ModelForm):
     class Meta:
         model = PainFactorAffecting
         fields = "__all__"
+        widgets = {
+            "date": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+        }
 
 
 class PainFactorAffectingFormSetHelper(FormHelper):
@@ -322,6 +337,9 @@ class PainTargetedLevelForm(forms.ModelForm):
     class Meta:
         model = PainTargetedLevel
         fields = "__all__"
+        widgets = {
+            "date": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+        }
 
 
 class PainTargetedLevelFormSetHelper(FormHelper):
@@ -365,6 +383,9 @@ class PainInterventionForm(forms.ModelForm):
     class Meta:
         model = PainIntervention
         fields = "__all__"
+        widgets = {
+            "date": forms.DateTimeInput(format=('%Y-%m-%dT%H:%M:%S'), attrs={'type': 'datetime-local'}),
+        }
 
 
 class PainInterventionFormSetHelper(FormHelper):
@@ -481,7 +502,7 @@ class PainForm(forms.ModelForm):
 
         if self.instance.pk:
             for field in self.fields:
-                print(field)
+                # print(field)
                 self.fields[field].widget.attrs["readonly"]=True
 
     class Meta:
