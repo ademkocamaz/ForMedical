@@ -100,8 +100,8 @@ DATABASES = {
         "ENGINE": "mssql",
         "NAME": "FORMEDICAL",
         "USER": "SA",
-        "PASSWORD": "764864",
-        "HOST": "ILKADAMNB",
+        "PASSWORD": "Aa**764864",
+        "HOST": "omv.local",
         "PORT": "1433",
         "OPTIONS": {
             "driver": "ODBC Driver 17 for SQL Server",
